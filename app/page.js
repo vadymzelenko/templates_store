@@ -162,7 +162,7 @@ export default function CatalogPage() {
                 <nav className="hidden md:flex items-center gap-8 text-xs font-semibold tracking-widest uppercase text-neutral-300">
                   <Link href="#catalog" className="hover:text-white transition-colors">Портфолио</Link>
                   <Link href="#catalog" className="hover:text-white transition-colors">Про мене</Link>
-                  <a href="https://t.me/your_username" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Контакти</a>
+                  <a href="https://t.me/vzbbme" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Контакти</a>
                 </nav>
 
                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
