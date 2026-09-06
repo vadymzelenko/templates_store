@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { templates } from '@/lib/templates';
-import { Search, Sparkles, Loader2, ArrowUpDown, ArrowDown, Copy, Check, ExternalLink } from 'lucide-react';
+import { Search, Sparkles, Loader2, ArrowUpDown, ArrowDown, Copy, Check, ExternalLink, ArrowRight } from 'lucide-react';
 
 const BATCH_SIZE = 6;
 
