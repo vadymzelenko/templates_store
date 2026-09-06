@@ -193,7 +193,7 @@ export default function CatalogPage() {
       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
     </a>
     <a
-        href="https://t.me/your_username"
+        href="https://t.me/vzbbme"
         target="_blank"
         rel="noopener noreferrer"
         className="w-full sm:w-auto px-8 py-3.5 bg-neutral-900/50 hover:bg-neutral-800 text-white border border-white/10 hover:border-white/20 text-sm font-medium rounded-full transition-all duration-300 flex items-center justify-center backdrop-blur-md"
