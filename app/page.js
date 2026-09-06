@@ -347,7 +347,7 @@ export default function CatalogPage() {
                 <span className="font-bold text-xs uppercase tracking-widest text-white">TemplateStore © 2026</span>
               </div>
               <div className="flex items-center gap-6 text-xs font-semibold uppercase tracking-widest text-neutral-400">
-                <a href="https://t.me/your_username" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
+                <a href="https://t.me/vzbbme" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1.5">
                   Telegram <ExternalLink className="w-3 h-3" />
                 </a>
                 <a href="mailto:hello@example.com" className="hover:text-white transition-colors">
