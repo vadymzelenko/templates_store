@@ -145,7 +145,7 @@ export default function CatalogPage() {
             {/* Фоновое изображение с затемнением */}
             <div className="absolute inset-0 pointer-events-none">
               <img
-                  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2200"
+                  src="https://images.unsplash.com/photo-1462774603919-1d8087e62cad?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Hero Background"
                   className="w-full h-full object-cover opacity-45 scale-105"
               />
@@ -156,7 +156,7 @@ export default function CatalogPage() {
             <header className="relative z-40 w-full flex justify-center">
               <div className="inline-flex fixed items-center justify-between gap-6 px-6 py-3 bg-neutral-900/40 backdrop-blur-xl border border-white/15 rounded-full shadow-2xl">
                 <Link href="/" className="font-bold text-sm tracking-wider uppercase text-white hover:opacity-80 transition-opacity">
-                  TEMPLATE<span className="text-neutral-400">STORE.</span>
+                  ШАБЛОНЫ<span className="text-neutral-400">САЙТОВ.</span>
                 </Link>
 
                 <nav className="hidden md:flex items-center gap-8 text-xs font-semibold tracking-widest uppercase text-neutral-300">
@@ -170,20 +170,40 @@ export default function CatalogPage() {
             </header>
 
             {/* Центральный крупный заголовок */}
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
-                className="relative z-10 max-w-5xl mx-auto text-center my-auto px-4"
-            >
-              <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-4 text-white uppercase drop-shadow-2xl">
-                Template Store
-              </h1>
-              <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-neutral-300 font-medium max-w-lg mx-auto leading-relaxed">
-                Професійні веб-інтерфейсы, Харків.<br />
-                Мистецтво візуальної історії та чистого коду.
-              </p>
-            </motion.div>
+// Убираем капслок из подзаголовка для лучшей читаемости, делаем текст крупнее и спокойнее.
+// Добавляем CTA-кнопки прямо под текстом, чтобы сразу направлять пользователя в каталог.
+<motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+    className="relative z-10 max-w-4xl mx-auto text-center my-auto px-4 flex flex-col items-center"
+>
+  <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter mb-6 text-white uppercase drop-shadow-2xl">
+    Template Store
+  </h1>
+  
+  <p className="text-base sm:text-lg text-neutral-400 font-normal max-w-xl mx-auto leading-relaxed mb-8">
+    Готовые премиум-шаблоны для вашего бизнеса. Вы выбираете дизайн — мы настраиваем, интегрируем и запускаем.
+  </p>
+
+  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+    <a
+        href="#catalog"
+        className="w-full sm:w-auto px-8 py-3.5 bg-white text-black hover:bg-neutral-200 text-sm font-bold rounded-full transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(255,255,255,0.2)] flex items-center justify-center gap-2 group"
+    >
+      Смотреть каталог
+      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+    </a>
+    <a
+        href="https://t.me/your_username"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full sm:w-auto px-8 py-3.5 bg-neutral-900/50 hover:bg-neutral-800 text-white border border-white/10 hover:border-white/20 text-sm font-medium rounded-full transition-all duration-300 flex items-center justify-center backdrop-blur-md"
+    >
+      Заказать проект
+    </a>
+  </div>
+</motion.div>
 
             {/* Кнопка прокрутки вниз */}
             <div className="relative z-10 flex justify-center pb-2">
