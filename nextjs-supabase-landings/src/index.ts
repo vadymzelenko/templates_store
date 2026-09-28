@@ -1,0 +1,34 @@
+// src/index.ts — публичный API пакета
+
+export { BookingEngine, BookingEngineError } from "./core/BookingEngine";
+
+export type {
+  IBookingStorage,
+  IEmailProvider,
+  ILockProvider,
+  BookingEngineConfig,
+  UserRecord,
+  ResourceRecord,
+  BookingRecord,
+  LogRecord,
+  BookingStatus,
+  CreateUserInput,
+  CreateResourceInput,
+  CreateBookingInput,
+  ReserveSlotInput,
+  ReserveSlotResult,
+  AvailabilitySlot,
+} from "./types";
+
+export { SupabaseAdapter } from "./adapters/storage/SupabaseAdapter";
+export type { SupabaseAdapterConfig } from "./adapters/storage/SupabaseAdapter";
+
+export { MemoryLockAdapter } from "./adapters/lock/MemoryLockAdapter";
+
+export { ResendAdapter } from "./adapters/email/ResendAdapter";
+export type { ResendAdapterConfig } from "./adapters/email/ResendAdapter";
+
+export { NodemailerAdapter } from "./adapters/email/NodemailerAdapter";
+export type { NodemailerAdapterConfig } from "./adapters/email/NodemailerAdapter";
+
+export { ConsoleEmailAdapter } from "./adapters/email/ConsoleAdapter";
