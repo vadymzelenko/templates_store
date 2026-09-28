@@ -7,6 +7,7 @@ import {
   ConsoleEmailAdapter,
   SupabaseAdapter,     // ← новое
 } from "@vzbb-db-system/core";
+import { waitUntil } from "@vercel/functions";
 
 import { siteEnv, siteEnvNumber, siteBaseUrl } from "@/lib/env";
 
@@ -89,16 +90,17 @@ export function getEngine(siteId) {
   const emailProvider = buildEmailProvider(prefix, config);
 
   const engine = new BookingEngine({
-    storage,
-    emailProvider,
-    lockProvider: new MemoryLockAdapter(),
-    jwtSecret: siteEnv(prefix, "JWT_SECRET", `dev-insecure-secret-${siteId}`),
-    baseUrl: siteBaseUrl(siteId, prefix),   // ← было siteEnv(prefix, "BASE_URL", ...)
-    pendingTtlMinutes: siteEnvNumber(prefix, "PENDING_TTL_MINUTES", 15),
-    confirmTokenTtlMinutes: siteEnvNumber(prefix, "CONFIRM_TOKEN_TTL_MINUTES", 30),
-    loginTokenTtlMinutes: siteEnvNumber(prefix, "LOGIN_TOKEN_TTL_MINUTES", 15),
-    sessionTtlDays: siteEnvNumber(prefix, "SESSION_TTL_DAYS", 30),
-  });
+  storage,
+  emailProvider,
+  lockProvider: new MemoryLockAdapter(),
+  jwtSecret: siteJwtSecret(siteId, prefix),
+  baseUrl: siteBaseUrl(siteId, prefix),
+  pendingTtlMinutes: siteEnvNumber(prefix, "PENDING_TTL_MINUTES", 15),
+  confirmTokenTtlMinutes: siteEnvNumber(prefix, "CONFIRM_TOKEN_TTL_MINUTES", 30),
+  loginTokenTtlMinutes: siteEnvNumber(prefix, "LOGIN_TOKEN_TTL_MINUTES", 15),
+  sessionTtlDays: siteEnvNumber(prefix, "SESSION_TTL_DAYS", 30),
+  waitUntil,
+});
 
   engineCache.set(siteId, engine);
   return engine;
