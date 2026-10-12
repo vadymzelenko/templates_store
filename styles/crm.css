@@ -1,0 +1,19 @@
+/* Перегляд записів: кабінет клієнта (картки) і CRM власника (таблиця, журнал) */
+.page-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; margin:12px 0 24px; }
+.page-head h1 { margin-bottom:2px; }
+
+.list { display:grid; gap:14px; }
+.booking { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+.kv { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px 28px; margin:0; flex:1; }
+.kv dt { font-size:.8rem; color:var(--muted); }
+.kv dd { margin:0; font-weight:500; }
+.side { display:flex; flex-direction:column; gap:10px; align-items:flex-end; }
+
+.scroll { overflow-x:auto; }
+.table { width:100%; border-collapse:collapse; font-size:.9rem; }
+.table th { font-weight:500; color:var(--muted); font-size:.8rem; }
+.table th, .table td { text-align:left; padding:11px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+.table tbody tr:last-child td { border-bottom:0; }
+.table select { padding:6px 8px; font-size:.9rem; }
+.nowrap { white-space:nowrap; }
+.mono { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.75rem; color:var(--muted); word-break:break-all; max-width:360px; }

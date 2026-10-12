@@ -1,0 +1,7 @@
+/* Каркас сторінки /admin: заголовок, вкладки, панель фільтрів */
+.admin-head { display:flex; align-items:baseline; gap:12px; margin:12px 0 4px; }
+.admin-head h1 { margin:0; font-size:2rem; }
+.admin-count { color:var(--muted); font-size:.95rem; }
+.tabs { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:16px 0 18px; }
+.filter { width:auto; padding:7px 12px; margin-left:auto; }
+@media (max-width:560px) { .filter { margin-left:0; } }

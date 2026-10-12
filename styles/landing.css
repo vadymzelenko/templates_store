@@ -1,0 +1,70 @@
+/* Лендинг: hero з контактним листом, формати, кроки, запис, FAQ, футер */
+.hero { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:64px; align-items:center; padding:48px 0 88px; }
+.hero h1 { font-size:clamp(2.5rem,5.6vw,4.3rem); line-height:1.03; letter-spacing:-.035em; max-width:11ch; margin:0 0 22px; }
+.hero-sub { font-size:1.15rem; color:var(--muted); max-width:42ch; }
+.hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
+.hero-note { margin:18px 0 0; font-size:.9rem; color:var(--muted); }
+
+/* Контактний лист: єдиний виразний елемент сторінки */
+.sheet { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:16px 16px 12px; transform:rotate(1.2deg); }
+.sheet-title { display:flex; justify-content:space-between; font-size:.8rem; color:var(--muted); margin-bottom:14px; }
+.sheet-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px 12px; }
+.frame { margin:0; }
+.shot-wrap { position:relative; }
+.shot { aspect-ratio:3/2; border-radius:3px; overflow:hidden;
+  background:radial-gradient(circle at 28% 18%,rgba(255,255,255,.65),transparent 55%),linear-gradient(135deg,var(--a),var(--b)); }
+.shot img { width:100%; height:100%; object-fit:cover; display:block; }
+.frame figcaption { display:flex; justify-content:space-between; gap:6px; font-size:.72rem; color:var(--muted); margin-top:6px; }
+.frame.pick .shot-wrap::after { content:""; position:absolute; inset:-9px -11px; border:2.5px solid var(--mark); border-radius:46% 54% 50% 50% / 56% 44% 56% 44%; transform:rotate(-2.5deg); pointer-events:none; }
+
+/* Секції */
+.section { padding:72px 0; border-top:1px solid var(--line); }
+.section h2 { font-size:clamp(1.7rem,3.2vw,2.3rem); margin-bottom:32px; }
+
+/* Формати та ціни: прайс-рядки */
+.formats-list { list-style:none; margin:0; padding:0; }
+.formats-list li { display:grid; grid-template-columns:1fr auto auto auto; gap:28px; align-items:center; padding:22px 0; border-bottom:1px solid var(--line); }
+.formats-list li:first-child { border-top:1px solid var(--line); }
+.f-name { font-size:1.15rem; font-weight:600; margin:0; letter-spacing:-.01em; }
+.f-desc { margin:2px 0 0; color:var(--muted); max-width:46ch; }
+.f-meta { color:var(--muted); font-size:.9rem; white-space:nowrap; }
+.f-price { font-family:var(--font-display); font-size:1.3rem; font-weight:500; white-space:nowrap; }
+
+/* Кроки: справжня послідовність, тому нумерація доречна */
+.steps { list-style:none; counter-reset:step; display:grid; grid-template-columns:repeat(3,1fr); gap:36px; margin:0; padding:0; }
+.steps li { counter-increment:step; }
+.steps li::before { content:counter(step); display:grid; place-items:center; width:36px; height:36px; border-radius:50%; background:var(--soft); color:var(--accent); font-weight:600; margin-bottom:16px; }
+.steps h3 { font-size:1.15rem; font-weight:600; }
+.steps p { color:var(--muted); margin:0; max-width:34ch; }
+
+/* Запис */
+.book { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:56px; align-items:start; }
+.book h2 { margin-bottom:14px; }
+.book-info { margin:28px 0 0; display:grid; gap:14px; }
+.book-info dt { font-size:.85rem; color:var(--muted); }
+.book-info dd { margin:0; font-weight:500; }
+.book-card { padding:30px; }
+.sent { padding:24px 0; }
+
+/* FAQ */
+.faq { max-width:720px; }
+.faq details { border-bottom:1px solid var(--line); padding:18px 0; }
+.faq details:first-of-type { border-top:1px solid var(--line); }
+.faq summary { cursor:pointer; font-weight:500; list-style:none; display:flex; justify-content:space-between; gap:16px; }
+.faq summary::-webkit-details-marker { display:none; }
+.faq summary::after { content:"+"; color:var(--accent); font-size:1.3rem; line-height:1; }
+.faq details[open] summary::after { content:"–"; }
+.faq p { margin:12px 0 0; color:var(--muted); }
+
+.footer { padding:28px 0 8px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; color:var(--muted); font-size:.9rem; }
+
+@media (max-width:860px) {
+  .hero { grid-template-columns:1fr; gap:44px; padding:24px 0 56px; }
+  .steps { grid-template-columns:1fr; gap:28px; }
+  .book { grid-template-columns:1fr; gap:36px; }
+  .section { padding:52px 0; }
+}
+@media (max-width:720px) {
+  .formats-list li { grid-template-columns:1fr auto; grid-template-areas:"info price" "meta pick"; gap:10px 16px; }
+  .f-info { grid-area:info; } .f-price { grid-area:price; } .f-meta { grid-area:meta; } .f-pick { grid-area:pick; }
+}
