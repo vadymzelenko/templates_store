@@ -1,0 +1,81 @@
+body { margin:0; background:#202124; }
+.g14 { --ink:#f1efe7; --bg:#202124; --y:#ffc928; --mute:#97958d; --line:#3b3d41;
+  min-height:100vh; color:var(--ink); font-family:'Fira Sans Condensed', 'Arial Narrow', sans-serif; font-size:18px; line-height:1.45;
+  background:var(--bg); background-image:radial-gradient(#2b2d31 1px, transparent 1.2px); background-size:14px 14px; }
+.g14 a { color:inherit; }
+.g14 h1 { font-family:'Tektur', sans-serif; font-weight:900; margin:0; line-height:.92; letter-spacing:-.01em; }
+
+.g14-top { display:flex; align-items:center; gap:24px; flex-wrap:wrap; padding:16px 28px; border-bottom:1px solid var(--line); }
+.g14-plate { display:inline-flex; align-items:stretch; background:#f7f7f0; color:#111; border:3px solid #111; outline:2px solid #f7f7f0; border-radius:6px; font-family:'Tektur', sans-serif; font-weight:700; font-size:1.3rem; letter-spacing:.08em; padding-right:12px; }
+.g14-plate i { font-style:normal; background:#1f4fb6; color:#ffd400; font-size:.65rem; display:flex; align-items:flex-end; padding:0 6px 4px; margin-right:10px; }
+.g14-addr { color:var(--mute); font-size:.95rem; }
+.g14-tel { margin-left:auto; font-family:'Tektur', sans-serif; color:var(--y) !important; text-decoration:none; font-size:1.1rem; }
+
+.g14-tool { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(340px,.75fr); gap:48px; padding:44px 28px 70px; max-width:1320px; margin:0 auto; align-items:start; }
+.g14-ask h1 { font-size:clamp(3.4rem,8vw,7.4rem); color:var(--y); }
+.g14-ask-sub { color:var(--mute); font-size:1.15rem; margin:14px 0 28px; }
+.g14-sym { display:grid; grid-template-columns:repeat(2,1fr); gap:0; border-top:1px solid var(--line); }
+.g14-sym button { display:flex; align-items:center; gap:14px; text-align:left; font:inherit; font-size:1.35rem; font-weight:500; color:var(--ink); background:none; border:0; border-bottom:1px solid var(--line); padding:14px 4px; cursor:pointer; }
+.g14-sym button:nth-child(odd) { border-right:1px solid var(--line); }
+.g14-sym button:nth-child(even) { padding-left:18px; }
+.g14-sym button:hover { color:var(--y); }
+.g14-box { flex:none; width:26px; height:26px; border:2px solid currentColor; display:grid; place-items:center; font-family:'Tektur', sans-serif; font-size:1.1rem; color:var(--y); }
+.g14-sym button[aria-pressed="true"] { color:var(--y); }
+.g14-label { font-family:'Tektur', sans-serif; font-size:.85rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); margin:28px 0 10px; }
+.g14-cls { display:flex; flex-wrap:wrap; gap:8px; }
+.g14-cls button { font:inherit; font-weight:600; color:var(--ink); background:transparent; border:2px solid var(--line); padding:8px 14px; cursor:pointer; display:flex; flex-direction:column; text-align:left; line-height:1.15; }
+.g14-cls small { font-weight:400; color:var(--mute); font-size:.8rem; }
+.g14-cls button[aria-pressed="true"] { border-color:var(--y); background:var(--y); color:#1b1b1b; }
+.g14-cls button[aria-pressed="true"] small { color:#4b3f10; }
+@media (max-width:960px) { .g14-tool { grid-template-columns:1fr; } }
+@media (max-width:560px) { .g14-sym { grid-template-columns:1fr; } .g14-sym button:nth-child(odd) { border-right:0; } .g14-sym button:nth-child(even) { padding-left:4px; } .g14-sym button { font-size:1.15rem; } }
+
+/* Бланк заказ-наряда */
+.g14-order { position:sticky; top:52px; background:#f4f1e6; color:#1c1c1c; padding:22px 22px 26px; font-variant-numeric:tabular-nums; transform:rotate(1deg);
+  box-shadow:0 2px 0 #d6d1bf, 0 30px 40px -20px rgba(0,0,0,.6); background-image:repeating-linear-gradient(transparent 0 31px, #e2ddcb 31px 32px); }
+.g14-order::before { content:""; position:absolute; top:-10px; left:50%; width:90px; height:22px; margin-left:-45px; background:#8b8f96; border-radius:3px; box-shadow:inset 0 -3px 0 #6d7177; }
+.g14-order-h { display:flex; justify-content:space-between; font-family:'Tektur', sans-serif; font-weight:700; border-bottom:3px solid #1c1c1c; padding-bottom:8px; margin-bottom:6px; }
+.g14-order table { width:100%; border-collapse:collapse; font-size:1.05rem; }
+.g14-order td { padding:6px 0; border-bottom:1px dashed #b9b29d; vertical-align:top; }
+.g14-order td:last-child { text-align:right; white-space:nowrap; padding-left:12px; font-family:'Tektur', sans-serif; }
+.g14-empty { color:#8a836e; font-style:italic; }
+.g14-sum { display:flex; justify-content:space-between; align-items:flex-end; padding-top:12px; }
+.g14-sum span { font-size:.9rem; color:#5d5848; line-height:1.2; }
+.g14-sum b { font-family:'Tektur', sans-serif; font-weight:900; font-size:3.4rem; line-height:.9; }
+.g14-go { display:block; width:100%; margin-top:18px; font:inherit; font-family:'Tektur', sans-serif; font-weight:700; font-size:1.1rem; background:#1c1c1c; color:var(--y); border:0; padding:14px; cursor:pointer; }
+.g14-go:disabled { opacity:.35; cursor:default; }
+.g14-when { margin-top:16px; display:grid; gap:10px; }
+.g14-days, .g14-hours { display:flex; flex-wrap:wrap; gap:4px; }
+.g14-days button, .g14-hours button { font:inherit; font-size:.85rem; background:#fff; border:1.5px solid #1c1c1c; padding:4px 8px; cursor:pointer; color:#1c1c1c; display:flex; flex-direction:column; align-items:center; line-height:1.1; }
+.g14-days b { font-family:'Tektur', sans-serif; font-size:1.1rem; }
+.g14-hours button:disabled { opacity:.3; text-decoration:line-through; cursor:not-allowed; }
+.g14-days button[aria-pressed="true"], .g14-hours button[aria-pressed="true"] { background:#1c1c1c; color:var(--y); }
+.g14-when input { font:inherit; background:transparent; border:0; border-bottom:2px solid #1c1c1c; padding:8px 2px; color:#1c1c1c; border-radius:0; }
+.g14-when input:focus { outline:none; border-color:#c0392b; }
+.g14-err { color:#b42a18; margin:0; }
+.g14-stamp-wrap { margin-top:18px; position:relative; }
+.g14-stamp { display:inline-block; font-family:'Tektur', sans-serif; font-weight:900; font-size:2.2rem; color:#b42a18; border:4px solid #b42a18; padding:2px 14px; transform:rotate(-8deg); margin-bottom:12px; opacity:.9; }
+.g14-demo { font-size:.85rem; color:#6d6756; }
+.g14-link { font:inherit; background:none; border:0; text-decoration:underline; cursor:pointer; padding:0; color:#1c1c1c; }
+@media (max-width:960px) { .g14-order { position:static; transform:none; } }
+
+/* Ворота боксов */
+.g14-doors { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:0 28px; max-width:1320px; margin:0 auto; }
+.g14-door { position:relative; aspect-ratio:1/1.05; background:repeating-linear-gradient(#55585e 0 16px, #46494e 16px 18px); border:6px solid #2d2f33; border-top-width:14px; display:flex; align-items:flex-end; padding:14px; overflow:hidden; }
+.g14-door.open { background:linear-gradient(#55585e 0 22%, #121314 22%); }
+.g14-door.open::after { content:""; position:absolute; left:0; right:0; bottom:0; height:8px; background:repeating-linear-gradient(-45deg, var(--y) 0 12px, #121314 12px 24px); }
+.g14-door-n { position:absolute; top:10px; left:12px; font-family:'Tektur', sans-serif; font-weight:900; font-size:2.6rem; color:#2d2f33; line-height:1; }
+.g14-door.open .g14-door-n { color:var(--y); }
+.g14-door p { margin:0 0 6px; background:rgba(20,21,22,.85); padding:8px 10px; font-size:.95rem; color:#cfcdc5; width:100%; }
+.g14-door p b { display:block; color:var(--ink); font-size:1.1rem; }
+.g14-door.open p b { color:var(--y); }
+@media (max-width:760px) { .g14-doors { grid-template-columns:1fr 1fr; } }
+
+.g14-rules { max-width:1320px; margin:0 auto; padding:70px 28px; display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+.g14-rules p { margin:0; font-size:1.15rem; }
+.g14-rules b { display:block; font-family:'Tektur', sans-serif; font-size:2.6rem; color:var(--y); line-height:1; margin-bottom:8px; }
+@media (max-width:860px) { .g14-rules { grid-template-columns:1fr 1fr; } }
+@media (max-width:520px) { .g14-rules { grid-template-columns:1fr; } }
+.g14-foot { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; padding:24px 28px 36px; border-top:1px solid var(--line); color:var(--mute); font-size:.85rem; }
+.g14-foot span:first-child { font-family:'Tektur', sans-serif; font-weight:900; color:var(--ink); font-size:1.4rem; }
+.g14 :focus-visible { outline:3px solid var(--y); outline-offset:2px; }

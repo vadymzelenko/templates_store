@@ -2,20 +2,9 @@
 // Виджет записи для демо-лендингов. Ведёт себя как booking engine, но ничего не отправляет:
 // занятость слотов генерируется детерминированно, а вместо письма показывается итог.
 // Внешний вид настраивается CSS-переменными на обёртке: --bk-accent, --bk-ink, --bk-bg, --bk-line, --bk-radius.
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const WD = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-const MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-const toMin = (s) => { const [h, m] = s.split(':').map(Number); return h * 60 + m; };
-const fmt = (n) => `${String(Math.floor(n / 60)).padStart(2, '0')}:${String(n % 60).padStart(2, '0')}`;
-const iso = (d) => d.toLocaleDateString('sv-SE');
-
-// Стабильный псевдослучайный «занято» — одинаковый при каждом рендере
-function hash(str) {
-  let h = 2166136261;
-  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
-  return (h >>> 0) / 4294967295;
-}
+import useSlots, { WD, MONTHS } from './useSlots';
 
 export default function DemoBooking({
   services = [],          // [{ name, price?, note? }]
@@ -35,15 +24,10 @@ export default function DemoBooking({
 }) {
   const [service, setService] = useState('');
   const [resource, setResource] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
   const [form, setForm] = useState({ name: '', phone: '' });
   const [err, setErr] = useState('');
   const [done, setDone] = useState(false);
-  const [now, setNow] = useState(null);
-
-  // Даты считаем только в браузере, чтобы не было расхождений с сервером
-  useEffect(() => { setNow(new Date()); }, []);
+  const { dayList, date, setDate, times, time, setTime, busy } = useSlots({ hours, closed, days, busyRate, resource });
 
   // Кнопки «Записаться» в прайсе шлют событие prefill
   useEffect(() => {
@@ -54,33 +38,6 @@ export default function DemoBooking({
     window.addEventListener('prefill', h);
     return () => window.removeEventListener('prefill', h);
   }, []);
-
-  const dayList = useMemo(() => {
-    if (!now) return [];
-    const out = [];
-    const d = new Date(now); d.setHours(0, 0, 0, 0);
-    // Под вечер сегодняшний день почти весь в прошлом — начинаем с завтра
-    if (now.getHours() * 60 + now.getMinutes() > toMin(hours.end) - 3 * hours.step) d.setDate(d.getDate() + 1);
-    while (out.length < days) {
-      if (!closed.includes(d.getDay())) out.push(new Date(d));
-      d.setDate(d.getDate() + 1);
-    }
-    return out;
-  }, [now, days, closed, hours]);
-
-  useEffect(() => { if (!date && dayList.length) setDate(iso(dayList[0])); }, [dayList, date]);
-
-  const times = useMemo(() => {
-    const out = [];
-    for (let t = toMin(hours.start); t + hours.step <= toMin(hours.end); t += hours.step) out.push(fmt(t));
-    return out;
-  }, [hours]);
-
-  const isToday = now && date === iso(now);
-  const nowMin = now ? now.getHours() * 60 + now.getMinutes() : 0;
-  const busy = (t) => (isToday && toMin(t) <= nowMin + 30) || hash(`${date}|${t}|${resource}`) < busyRate;
-
-  useEffect(() => { if (time && busy(time)) setTime(''); }); // слот стал занят после смены даты/мастера
 
   function submit(e) {
     e.preventDefault();
@@ -144,8 +101,8 @@ export default function DemoBooking({
       <fieldset className="bk-group">
         <legend>День</legend>
         <div className="bk-days">
-          {dayList.map((d) => {
-            const v = iso(d);
+          {dayList.map((v) => {
+            const d = new Date(v + 'T00:00:00');
             return (
               <button type="button" key={v} className={date === v ? 'on' : ''} aria-pressed={date === v} onClick={() => setDate(v)}>
                 <small>{WD[d.getDay()]}</small><b>{d.getDate()}</b>

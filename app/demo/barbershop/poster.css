@@ -1,0 +1,106 @@
+body { margin:0; background:#3b3632; }
+.ps-page { --paper:#ece2cc; --ink:#1b1712; --red:#c2281a; --mute:#6c6153;
+  min-height:100vh; color:var(--ink); font-family:'Old Standard TT', Georgia, serif; font-size:18px; line-height:1.5;
+  /* кирпичная стена, на которую наклеена афиша */
+  background:#3b3632 repeating-linear-gradient(0deg, transparent 0 46px, #2f2a26 46px 50px),
+    repeating-linear-gradient(90deg, transparent 0 96px, #2f2a26 96px 100px); }
+.ps-page a { color:inherit; }
+.ps-wall { max-width:1100px; margin:0 auto; padding:48px 20px 60px; }
+.ps-page h1, .ps-page h2, .ps-page h3 { font-family:'Alumni Sans', 'Arial Narrow', sans-serif; font-weight:900; text-transform:uppercase; margin:0; line-height:.85; }
+
+/* Афиша */
+.ps-poster { position:relative; background:var(--paper); padding:44px 6% 0; transform:rotate(-.6deg); text-align:center;
+  box-shadow:0 30px 50px -20px rgba(0,0,0,.6);
+  background-image:radial-gradient(circle at 20% 10%, rgba(255,255,255,.35), transparent 40%), radial-gradient(circle at 90% 80%, rgba(120,90,40,.15), transparent 50%); }
+.ps-tape { position:absolute; top:-14px; width:120px; height:30px; background:rgba(230,222,190,.75); box-shadow:0 1px 3px rgba(0,0,0,.2); }
+.ps-tape-l { left:30px; transform:rotate(-8deg); } .ps-tape-r { right:30px; transform:rotate(6deg); }
+.ps-top { display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; margin:0 0 6px; font-family:'Alumni Sans', sans-serif; font-weight:800; font-size:1.25rem; letter-spacing:.14em; text-transform:uppercase; border-bottom:3px double var(--ink); padding-bottom:10px; }
+.ps-name { font-size:clamp(6rem,23vw,17rem); letter-spacing:-.01em; margin:8px 0 0 !important; color:var(--ink); }
+.ps-sub { font-style:italic; font-size:clamp(1.2rem,2.6vw,1.9rem); margin:4px 0 26px; }
+.ps-card { display:flex; justify-content:center; flex-wrap:wrap; gap:4px 0; border-block:6px solid var(--ink); padding:12px 0; }
+.ps-card-n { font-family:'Alumni Sans', sans-serif; font-weight:900; font-size:clamp(2.6rem,7vw,5.2rem); text-transform:uppercase; line-height:1; color:var(--red); }
+.ps-card-n i { font-style:normal; color:var(--ink); font-size:.5em; margin:0 .5em; vertical-align:middle; }
+.ps-every { font-size:1.2rem; margin:18px 0 24px; }
+.ps-every b { font-family:'Alumni Sans', sans-serif; font-size:1.6rem; }
+.ps-stamp { position:absolute; right:4%; top:34%; width:150px; height:150px; border-radius:50%; border:4px solid var(--red); color:var(--red) !important; text-decoration:none;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; transform:rotate(14deg); font-family:'Alumni Sans', sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:.1em;
+  box-shadow:inset 0 0 0 4px var(--paper), inset 0 0 0 6px var(--red); mix-blend-mode:multiply; transition:transform .2s; }
+.ps-stamp:hover { transform:rotate(4deg) scale(1.05); }
+.ps-stamp b { font-size:3.6rem; line-height:.9; letter-spacing:0; }
+@media (max-width:760px) { .ps-stamp { position:static; margin:0 auto 20px; width:120px; height:120px; } .ps-stamp b { font-size:2.8rem; } }
+
+/* Отрывные листочки */
+.ps-tabs { display:flex; margin:0 -6.4%; border-top:2px dashed var(--ink); }
+.ps-tab { flex:1; min-width:0; height:190px; background:var(--paper); border:0; border-right:2px dashed rgba(27,23,18,.5); cursor:pointer; color:var(--ink);
+  writing-mode:vertical-rl; transform:rotate(180deg); display:flex; align-items:center; justify-content:flex-start; gap:10px; padding:14px 0; font:inherit;
+  transition:transform .45s cubic-bezier(.5,-0.4,.6,1.4), opacity .45s; }
+.ps-tab:last-child { border-right:0; }
+.ps-tab:hover { background:#f4ecd8; }
+.ps-tab:hover .ps-tab-price { color:var(--red); }
+.ps-tab-name { font-family:'Alumni Sans', sans-serif; font-weight:900; font-size:1.7rem; text-transform:uppercase; line-height:1; }
+.ps-tab-price { font-family:'Alumni Sans', sans-serif; font-weight:800; font-size:1.35rem; }
+.ps-tab-time { font-size:.85rem; color:var(--mute); font-style:italic; }
+.ps-tab.torn { transform:rotate(180deg) translateY(-30px) rotate(9deg); opacity:.0; }
+@media (max-width:640px) { .ps-tabs { flex-wrap:wrap; } .ps-tab { flex:0 0 25%; height:150px; border-bottom:2px dashed rgba(27,23,18,.5); } .ps-tab-name { font-size:1.4rem; } }
+
+.ps-note { text-align:center; margin:22px auto 0; max-width:420px; color:#e8dcc2; font-style:italic; }
+.ps-note p { margin:0; background:#2a2521; display:inline-block; padding:6px 14px; transform:rotate(1deg); }
+
+/* Мастера */
+.ps-fight { margin:70px auto 0; max-width:900px; background:var(--ink); color:var(--paper); padding:40px 6%; transform:rotate(.5deg); box-shadow:0 30px 50px -20px rgba(0,0,0,.7); }
+.ps-fight h2 { font-size:clamp(3rem,8vw,5.5rem); color:var(--red); text-align:center; margin-bottom:20px !important; }
+.ps-fighter { display:grid; grid-template-columns:110px 1fr auto; align-items:center; gap:22px; padding:20px 0; border-top:2px solid #4a4239; }
+.ps-f-years { font-family:'Alumni Sans', sans-serif; font-weight:800; text-transform:uppercase; font-size:.95rem; line-height:1; letter-spacing:.06em; color:#b9ab92; }
+.ps-f-years b { display:block; font-size:4rem; color:var(--paper); line-height:.85; }
+.ps-fighter h3 { font-size:clamp(2.6rem,6vw,4rem); }
+.ps-fighter h3 em { font-family:'Old Standard TT', serif; font-weight:400; font-style:italic; text-transform:none; font-size:.42em; color:var(--red); vertical-align:middle; margin-left:.3em; }
+.ps-fighter p { margin:4px 0 0; color:#cfc3ab; font-style:italic; }
+.ps-f-go { font-family:'Alumni Sans', sans-serif; font-weight:800; font-size:1.4rem; text-transform:uppercase; text-decoration:none; border:2px solid var(--paper); padding:6px 14px; white-space:nowrap; }
+.ps-f-go:hover { background:var(--red); border-color:var(--red); }
+@media (max-width:640px) { .ps-fighter { grid-template-columns:72px 1fr; } .ps-f-go { grid-column:1/-1; justify-self:start; } .ps-f-years b { font-size:3rem; } }
+
+/* Билет */
+.ps-book { margin:70px auto 0; max-width:1000px; scroll-margin-top:50px; }
+.tk { display:grid; grid-template-columns:300px 1fr; background:var(--paper); box-shadow:0 30px 50px -20px rgba(0,0,0,.6); transform:rotate(-.4deg);
+  -webkit-mask:radial-gradient(circle 14px at 300px 0, transparent 98%, #000) top/100% 51% no-repeat, radial-gradient(circle 14px at 300px 100%, transparent 98%, #000) bottom/100% 51% no-repeat;
+          mask:radial-gradient(circle 14px at 300px 0, transparent 98%, #000) top/100% 51% no-repeat, radial-gradient(circle 14px at 300px 100%, transparent 98%, #000) bottom/100% 51% no-repeat; }
+.tk-stub { padding:30px 26px; border-right:3px dashed var(--ink); background:#e2d5b8; }
+.tk-adm { font-family:'Alumni Sans', sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:.14em; margin:0; font-size:1.1rem; }
+.tk-num { font-family:'Alumni Sans', sans-serif; font-weight:900; font-size:3.6rem; color:var(--red); margin:0 0 14px; line-height:1; }
+.tk-stub dl { margin:0; display:grid; gap:10px; }
+.tk-stub dt { font-size:.8rem; text-transform:uppercase; letter-spacing:.1em; color:var(--mute); }
+.tk-stub dd { margin:0; font-weight:700; }
+.tk-sum { font-family:'Alumni Sans', sans-serif; font-size:2.4rem; line-height:1; }
+.tk-ok { margin:18px 0 0; font-family:'Alumni Sans', sans-serif; font-weight:900; font-size:1.6rem; color:var(--red); border:3px solid var(--red); padding:4px 10px; transform:rotate(-6deg); display:inline-block; }
+.tk-main { padding:30px 30px 34px; }
+.tk-main h2 { font-size:4rem; margin-bottom:10px !important; }
+.tk-label { font-family:'Alumni Sans', sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:.12em; margin:16px 0 6px; font-size:1.05rem; }
+.tk-row { display:flex; flex-wrap:wrap; gap:6px; }
+.tk-row button { font:inherit; font-size:.95rem; background:transparent; border:1.5px solid var(--ink); color:var(--ink); padding:5px 12px; cursor:pointer; border-radius:0; }
+.tk-row button:hover:not(:disabled) { background:#e2d5b8; }
+.tk-row button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
+.tk-row button:disabled { border-style:dashed; color:#a89a82; text-decoration:line-through; cursor:not-allowed; }
+.tk-days { flex-wrap:nowrap; overflow-x:auto; width:0; min-width:100%; padding-bottom:4px; }
+.tk-days button { flex:none; display:flex; flex-direction:column; align-items:center; width:52px; padding:4px 0; font-family:'Alumni Sans', sans-serif; font-weight:800; font-size:1.5rem; line-height:1; }
+.tk-days small { font-family:'Old Standard TT', serif; font-weight:400; font-size:.72rem; }
+.tk-fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
+.tk-fields label { display:flex; flex-direction:column; font-family:'Alumni Sans', sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:.12em; font-size:1.05rem; gap:2px; }
+.tk-fields input { font:inherit; font-family:'Old Standard TT', serif; text-transform:none; letter-spacing:0; font-weight:400; font-size:1.1rem; background:transparent; border:0; border-bottom:2px solid var(--ink); padding:6px 2px; color:var(--ink); border-radius:0; }
+.tk-fields input:focus { outline:none; border-bottom-color:var(--red); }
+.tk-err { color:var(--red); margin:12px 0 0; font-style:italic; }
+.tk-go { margin-top:22px; width:100%; background:var(--red); color:var(--paper); border:0; padding:14px; font-family:'Alumni Sans', sans-serif; font-weight:900; font-size:2rem; text-transform:uppercase; letter-spacing:.06em; cursor:pointer; }
+.tk-go:hover { background:#a51f13; }
+.tk-done h2 { color:var(--red); }
+.tk-demo { font-size:.85rem; font-style:italic; color:var(--mute); }
+.tk-again { font:inherit; background:none; border:1.5px solid var(--ink); padding:8px 14px; cursor:pointer; }
+@media (max-width:760px) {
+  .tk { grid-template-columns:1fr; -webkit-mask:none; mask:none; }
+  .tk-stub { border-right:0; border-bottom:3px dashed var(--ink); }
+  .tk-fields { grid-template-columns:1fr; }
+}
+
+.ps-foot { text-align:center; color:#e8dcc2; margin-top:80px; }
+.ps-foot p { margin:0 0 6px; }
+.ps-foot-big { font-family:'Alumni Sans', sans-serif; font-weight:900; font-size:clamp(3.5rem,10vw,7rem); text-transform:uppercase; line-height:.9; color:var(--paper); }
+.ps-foot-small { font-size:.8rem; opacity:.6; margin-top:20px !important; }
+.ps-page :focus-visible { outline:3px solid var(--red); outline-offset:2px; }

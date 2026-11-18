@@ -346,15 +346,6 @@ export default function CatalogPage() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                          <div className="absolute top-3 left-3 z-10 flex gap-1.5">
-                            <span className="bg-black/60 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-full text-[10px] font-bold text-neutral-200 uppercase tracking-wider">
-                              {item.category}
-                            </span>
-                            {item.isNew && (
-                              <span className="bg-emerald-400 text-black px-2.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider">Новое</span>
-                            )}
-                          </div>
-
                           <button
                             onClick={(e) => handleCopy(e, item)}
                             aria-label="Скопировать сообщение для заказа"
@@ -369,19 +360,21 @@ export default function CatalogPage() {
                         </div>
                       </div>
 
-                      <div className="p-6 flex flex-col flex-grow relative z-10">
-                        <div className="flex justify-between items-start mb-2 gap-4">
-                          <h2 className="text-xl font-bold text-white tracking-tight group-hover:text-neutral-300 transition-colors">{item.title}</h2>
-                          <span className="text-sm font-extrabold text-white bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 shrink-0">{item.price}</span>
+                      <div className="px-6 pt-5 pb-6 flex flex-col flex-grow relative z-10">
+                        <p className="flex items-center gap-2 text-xs font-semibold text-neutral-400 mb-2">
+                          {item.category}
+                          {item.isNew && <span className="text-emerald-400">· новое</span>}
+                        </p>
+                        <div className="flex justify-between items-baseline mb-2 gap-4">
+                          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-tight">{item.title}</h2>
+                          <span className="text-lg font-extrabold text-white shrink-0">{item.price}</span>
                         </div>
-                        {m.why && <p className="text-[11px] font-bold text-amber-300 mb-2">{m.why}</p>}
-                        <p className="text-xs font-medium text-neutral-400 line-clamp-2 leading-relaxed mb-4">{item.tagline}</p>
+                        {m.why && <p className="text-xs font-bold text-amber-300 mb-2">{m.why}</p>}
+                        <p className="text-sm text-neutral-300 leading-relaxed mb-5">{item.tagline}</p>
                         {item.badges?.length > 0 && (
-                          <div className="mt-auto flex flex-wrap gap-1.5">
-                            {item.badges.map((b) => (
-                              <span key={b} className="text-[10px] font-bold text-neutral-300 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">{b}</span>
-                            ))}
-                          </div>
+                          <p className="mt-auto pt-4 border-t border-white/10 text-xs sm:text-[13px] font-semibold text-neutral-200 leading-relaxed">
+                            {item.badges.join('  ·  ')}
+                          </p>
                         )}
                       </div>
                     </Link>
