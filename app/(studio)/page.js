@@ -1,18 +1,11 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import config from '@/engine.config';
 import Catalog from '@/components/store/Catalog';
 import BookingForm from '@/components/BookingForm';
 import PickButton from '@/components/PickButton';
-import { projects } from '@/store/catalog';
+// Список снятых превью пишет `npm run previews` (на Vercel папки public/ у сервера нет, поэтому не читаем диск)
+import previews from '@/store/previews.json';
 
 const L = config.landing;
-
-// Какие превью уже сняты (public/previews/<slug>.jpg)
-function previewSlugs() {
-  const dir = path.join(process.cwd(), 'public', 'previews');
-  return projects.map((p) => p.slug).filter((s) => fs.existsSync(path.join(dir, `${s}.jpg`)));
-}
 
 const faq = [
   { q: 'Это шаблон или сайт под меня?', a: 'Сайт под вас. Готовый проект — это основа: структура, вёрстка и логика уже проверены. Мы меняем тексты, услуги, цены, фото, цвета и поля записи под ваш бизнес. Поэтому выходит быстрее и дешевле, чем с нуля.' },
@@ -156,7 +149,7 @@ export default function Home() {
   return (
     <>
       <main>
-        <Catalog previews={previewSlugs()} />
+        <Catalog previews={previews} />
         <Engine />
         <Prices />
         <Process />
