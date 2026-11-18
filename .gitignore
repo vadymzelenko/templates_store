@@ -3,3 +3,6 @@ node_modules
 .env*
 !.env.example
 .vercel
+# файлы, которые генерирует Next.js 16 для ИИ-агентов
+AGENTS.md
+CLAUDE.md
