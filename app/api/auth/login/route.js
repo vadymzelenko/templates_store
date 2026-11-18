@@ -2,11 +2,13 @@ import { NextResponse } from 'next/server';
 import config from '@/engine.config';
 import { canSend, issueToken } from '@/lib/auth';
 import { sendMagicLink } from '@/lib/mailer';
+import { engineReady } from '@/lib/ready';
 
 const T = config.texts;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export async function POST(req) {
+  if (!engineReady()) return NextResponse.json({ error: T.unavailable }, { status: 503 });
   const { email: raw } = await req.json().catch(() => ({}));
   const email = String(raw || '').trim().toLowerCase();
   if (!EMAIL.test(email)) return NextResponse.json({ error: T.invalidEmail }, { status: 400 });
