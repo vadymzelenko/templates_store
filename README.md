@@ -28,6 +28,21 @@ Next.js 16 + Tailwind 4 + Framer Motion. Деплой — Vercel (ветка `ma
 `telegramUrl` можно оставить пустым — кнопка сама откроет чат @vzbbme с готовым текстом.
 
 ## Демо с онлайн-записью
-`/demo/barbershop`, `/demo/dental`, `/demo/autoservice`, `/demo/coffee`, `/demo/renovation`, `/demo/vet`, `/demo/photo-studio`.
-Виджет записи — `components/demo/DemoBooking.js` (ведёт себя как booking engine, но ничего не отправляет).
+| Демо | Идея |
+|---|---|
+| `/demo/barbershop` | уличная афиша, прайс отрывными листочками, запись-билет |
+| `/demo/dental` | письмо от клиники, смета в тексте, запись одной фразой |
+| `/demo/autoservice` | «Что с машиной?» → заказ-наряд → бронь поста |
+| `/demo/coffee` | меловая доска-меню, чек предзаказа |
+| `/demo/renovation` | синька-чертёж, кликабельная планировка, диаграмма сроков |
+| `/demo/vet` | ветпаспорт, персонализация по кличке |
+| `/demo/fitness` | расписание недели на первом экране, бронь мест |
+| `/demo/lawyer` | сайт-папка «Дело» с вкладками, заявление на консультацию |
+| `/demo/cleaning` | слайдер до/после, калькулятор уборки |
+| `/demo/glamping` | ночной лес, календарь заезда/выезда с ценой ночей |
+| `/demo/plumber` | аварийный: телефон на весь экран, «что делать сейчас», время приезда |
+| `/demo/photo-studio` | первый лендинг на booking engine |
+
+Логика слотов для записи — `components/demo/useSlots.js`, данные каждого демо — `app/demo/<slug>/data.js`.
+Демо-запись ничего не отправляет; в рабочей версии подключается booking engine.
 Рабочий booking engine (Supabase, magic link, кабинет, CRM) лежит в ветке `supabase-crm-landings` и подключается к проекту клиента при заказе.

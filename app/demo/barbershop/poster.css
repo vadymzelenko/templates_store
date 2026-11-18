@@ -41,7 +41,7 @@ body { margin:0; background:#3b3632; }
 .ps-tab-price { font-family:'Alumni Sans', sans-serif; font-weight:800; font-size:1.35rem; }
 .ps-tab-time { font-size:.85rem; color:var(--mute); font-style:italic; }
 .ps-tab.torn { transform:rotate(180deg) translateY(-30px) rotate(9deg); opacity:.0; }
-@media (max-width:640px) { .ps-tabs { flex-wrap:wrap; } .ps-tab { flex:0 0 25%; height:150px; border-bottom:2px dashed rgba(27,23,18,.5); } .ps-tab-name { font-size:1.4rem; } }
+@media (max-width:640px) { .ps-tabs { overflow-x:auto; scrollbar-width:none; } .ps-tab { flex:0 0 64px; height:170px; } .ps-tab-name { font-size:1.45rem; } }
 
 .ps-note { text-align:center; margin:22px auto 0; max-width:420px; color:#e8dcc2; font-style:italic; }
 .ps-note p { margin:0; background:#2a2521; display:inline-block; padding:6px 14px; transform:rotate(1deg); }

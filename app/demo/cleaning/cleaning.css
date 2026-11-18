@@ -1,0 +1,73 @@
+body { margin:0; background:#dff4fb; }
+.cl { --ink:#1a2b3c; --sky:#dff4fb; --blue:#1f7ae0; --yel:#ffd23f; --pink:#ff7aa2; --white:#fff;
+  min-height:100vh; background:var(--sky); color:var(--ink); font-family:'Rubik', system-ui, sans-serif; font-size:17px; line-height:1.5; overflow-x:clip;
+  background-image:radial-gradient(circle at 12% 18%, rgba(255,255,255,.9) 0 26px, transparent 27px), radial-gradient(circle at 86% 9%, rgba(255,255,255,.8) 0 40px, transparent 41px), radial-gradient(circle at 92% 62%, rgba(255,255,255,.7) 0 18px, transparent 19px), radial-gradient(circle at 6% 74%, rgba(255,255,255,.7) 0 34px, transparent 35px); }
+.cl h1, .cl h2, .cl-logo { font-family:'Dela Gothic One', sans-serif; font-weight:400; margin:0; line-height:1; letter-spacing:-.02em; }
+.cl-top { display:flex; justify-content:space-between; align-items:center; padding:18px 28px; max-width:1200px; margin:0 auto; }
+.cl-logo { font-size:2.2rem; color:var(--blue); } .cl-logo span { color:var(--yel); -webkit-text-stroke:1.5px var(--ink); margin-left:4px; }
+.cl-top a { font-weight:700; color:var(--ink); text-decoration:none; background:var(--yel); padding:8px 16px; border-radius:999px; border:2px solid var(--ink); }
+.cl-hero { max-width:1200px; margin:0 auto; padding:10px 28px 50px; }
+.cl-hero h1 { font-size:clamp(2.4rem,6vw,4.6rem); margin-bottom:22px; }
+.cl-hero h1 span { background:var(--yel); padding:0 .15em; border-radius:.2em; }
+.cl-ba { position:relative; border:4px solid var(--ink); border-radius:28px; overflow:hidden; box-shadow:10px 10px 0 var(--ink); background:#fff; aspect-ratio:600/380; touch-action:pan-y; }
+.cl-room { display:block; width:100%; height:100%; }
+.cl-ba-dirty { position:absolute; inset:0; }
+.cl-ba-handle { position:absolute; top:0; bottom:0; width:4px; margin-left:-2px; background:var(--ink); pointer-events:none; }
+.cl-ba-handle span { position:absolute; top:50%; left:50%; width:58px; height:58px; margin:-29px 0 0 -29px; border-radius:50%; background:var(--yel); border:4px solid var(--ink); display:grid; place-items:center; font-size:1.6rem; font-weight:800; }
+.cl-ba-tag { position:absolute; top:14px; font-family:'Dela Gothic One', sans-serif; font-weight:400; background:#fff; border:3px solid var(--ink); padding:2px 12px; border-radius:999px; pointer-events:none; }
+.cl-ba-tag.l { left:14px; } .cl-ba-tag.r { right:14px; background:var(--yel); }
+.cl-ba input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; margin:0; }
+.cl-lead { font-size:1.2rem; max-width:56ch; margin:30px 0 0; }
+
+.cl-calc { max-width:1200px; margin:0 auto; padding:30px 28px 60px; display:grid; grid-template-columns:minmax(0,1.3fr) minmax(300px,.9fr); gap:28px; align-items:start; }
+.cl-calc-l { background:#fff; border:4px solid var(--ink); border-radius:28px; padding:28px; }
+.cl h2 { font-size:clamp(1.8rem,3.6vw,2.6rem); margin-bottom:18px; }
+.cl-cnt { display:grid; grid-template-columns:1fr 48px 52px 48px; align-items:center; gap:6px; padding:8px 0; border-bottom:2px dashed #c9e3ee; font-size:1.2rem; font-weight:500; }
+.cl-cnt button, .cl-mini button { width:44px; height:44px; border-radius:50%; border:3px solid var(--ink); background:var(--sky); font:inherit; font-size:1.4rem; font-weight:700; cursor:pointer; color:var(--ink); line-height:1; }
+.cl-cnt button:hover, .cl-mini button:hover { background:var(--yel); }
+.cl-cnt b { text-align:center; font-family:'Dela Gothic One', sans-serif; font-size:1.8rem; }
+.cl-k { color:#5b6b7a; margin:8px 0 0; font-size:.92rem; }
+.cl-label { font-weight:700; margin:22px 0 10px; }
+.cl-extras { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:10px; }
+.cl-ex { display:flex; align-items:center; gap:10px; text-align:left; font:inherit; background:var(--sky); border:3px solid transparent; border-radius:18px; padding:10px 12px; cursor:pointer; color:var(--ink); }
+.cl-ex svg { width:30px; height:30px; flex:none; fill:none; stroke:var(--ink); stroke-width:1.8; stroke-linejoin:round; stroke-linecap:round; }
+.cl-ex span { display:flex; flex-direction:column; font-weight:500; line-height:1.2; } .cl-ex small { font-weight:400; color:#5b6b7a; }
+.cl-ex.on { border-color:var(--ink); background:var(--yel); }
+.cl-ex .cl-mini { flex-direction:row; align-items:center; gap:4px; margin-left:auto; }
+.cl-mini button { width:30px; height:30px; font-size:1rem; border-width:2px; } .cl-mini b { min-width:16px; text-align:center; }
+.cl-freq { display:flex; flex-wrap:wrap; gap:8px; }
+.cl-freq button { font:inherit; font-weight:500; background:#fff; border:3px solid var(--ink); border-radius:999px; padding:8px 16px; cursor:pointer; color:var(--ink); }
+.cl-freq em { font-style:normal; background:var(--pink); color:#fff; border-radius:999px; padding:0 7px; margin-left:6px; font-size:.85rem; }
+.cl-freq button[aria-pressed="true"] { background:var(--ink); color:#fff; }
+.cl-calc-r { position:sticky; top:52px; background:var(--blue); color:#fff; border:4px solid var(--ink); border-radius:28px; padding:24px; box-shadow:10px 10px 0 var(--ink); }
+.cl-bubble { background:#fff; color:var(--ink); border-radius:24px 24px 24px 6px; padding:16px 20px; border:3px solid var(--ink); }
+.cl-bubble p { margin:0; font-weight:500; } .cl-bubble b { display:block; font-family:'Dela Gothic One', sans-serif; font-size:2.8rem; line-height:1.05; }
+.cl-bubble span { color:#5b6b7a; font-size:.92rem; }
+.cl-calc-r .cl-label { color:#fff; }
+.cl-days, .cl-hours { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.cl-days button, .cl-hours button { font:inherit; font-weight:700; background:rgba(255,255,255,.15); color:#fff; border:2px solid rgba(255,255,255,.6); border-radius:14px; padding:6px 10px; cursor:pointer; display:flex; flex-direction:column; align-items:center; line-height:1.1; min-width:46px; }
+.cl-days small { font-weight:400; font-size:.75rem; }
+.cl-days button[aria-pressed="true"], .cl-hours button[aria-pressed="true"] { background:var(--yel); color:var(--ink); border-color:var(--ink); }
+.cl-hours button:disabled { opacity:.35; text-decoration:line-through; cursor:not-allowed; }
+.cl-calc-r input { font:inherit; width:100%; box-sizing:border-box; margin-top:8px; background:#fff; border:3px solid var(--ink); border-radius:16px; padding:11px 14px; color:var(--ink); }
+.cl-err { color:var(--yel); font-weight:700; margin:8px 0 0; }
+.cl-go { margin-top:14px; width:100%; font-family:'Dela Gothic One', sans-serif; font-weight:400; font-size:1.2rem; background:var(--yel); color:var(--ink); border:3px solid var(--ink); border-radius:999px; padding:14px; cursor:pointer; }
+.cl-go:hover { background:#fff; }
+.cl-done { margin-top:16px; } .cl-small { font-size:.85rem; opacity:.8; } .cl-link { font:inherit; color:#fff; background:none; border:0; text-decoration:underline; cursor:pointer; padding:0; }
+@media (max-width:900px) { .cl-calc { grid-template-columns:1fr; } .cl-calc-r { position:static; } }
+@media (max-width:520px) { .cl-hero, .cl-calc { padding-left:16px; padding-right:16px; } .cl-ba { box-shadow:6px 6px 0 var(--ink); border-radius:20px; } .cl-calc-l { padding:20px; } }
+
+.cl-promise { max-width:1200px; margin:0 auto; padding:20px 28px 60px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.cl-promise div { background:#fff; border:3px solid var(--ink); border-radius:24px; padding:20px; font-size:1.05rem; }
+.cl-promise div:nth-child(2) { background:var(--pink); color:#fff; } .cl-promise div:nth-child(3) { background:var(--yel); }
+.cl-promise b { display:block; font-family:'Dela Gothic One', sans-serif; font-size:1.5rem; }
+@media (max-width:760px) { .cl-promise { grid-template-columns:1fr; } }
+.cl-foot { text-align:center; padding:0 20px 40px; font-size:.85rem; color:#5b6b7a; }
+.cl :focus-visible { outline:3px solid var(--pink); outline-offset:2px; }
+.cl-ex:has(.cl-mini) { grid-column:span 2; }
+@media (max-width:520px) { .cl-ex:has(.cl-mini) { grid-column:auto; } }
+.cl h1, .cl h2, .cl-logo { font-weight:400; }
+.cl-ba-tag { font-family:'Rubik', sans-serif !important; font-weight:700 !important; }
+.cl-top a { white-space:nowrap; }
+.cl-hero h1 { line-height:1.15; }
+@media (max-width:520px) { .cl-top { padding:14px 16px; } .cl-top a { font-size:.85rem; padding:6px 12px; } .cl-logo { font-size:1.7rem; } }

@@ -6,14 +6,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { templates } from '@/lib/templates';
 import { industries } from '@/lib/industries';
 import { norm, matchTemplate, findNiche, industryOf, tgLink } from '@/lib/search';
+import OrderForm from '@/components/store/OrderForm';
 import { Search, Loader2, ArrowUpDown, ArrowDown, Copy, Check, ExternalLink, ArrowRight, X, CalendarCheck, Calculator, ShoppingBag, LayoutGrid } from 'lucide-react';
 
 const BATCH_SIZE = 9;
-const QUICK = ['Барбершоп', 'Стоматология', 'Автосервис', 'Кофейня', 'Ремонт квартир', 'Ветклиника', 'Фотограф', 'Психолог', 'Недвижимость'];
+const QUICK = ['Барбершоп', 'Стоматология', 'Автосервис', 'Кофейня', 'Ремонт квартир', 'Фитнес', 'Юрист', 'Клининг', 'Отель', 'Сантехник', 'Ветклиника', 'Фотограф'];
 
 // Фильтры по возможностям: ищем по меткам на карточке
 const FEATURES = [
-  { key: 'booking', label: 'Онлайн-запись', icon: CalendarCheck, test: (t) => (t.badges || []).some((b) => /запис|booksy/i.test(b)) },
+  { key: 'booking', label: 'Онлайн-запись', icon: CalendarCheck, test: (t) => (t.badges || []).some((b) => /запис|booksy|брон/i.test(b)) },
   { key: 'calc', label: 'Калькулятор', icon: Calculator, test: (t) => (t.badges || []).some((b) => /калькулятор/i.test(b)) },
   { key: 'preorder', label: 'Предзаказ', icon: ShoppingBag, test: (t) => (t.badges || []).some((b) => /предзаказ/i.test(b)) },
   { key: 'portfolio', label: 'Портфолио', icon: LayoutGrid, test: (t) => (t.badges || []).some((b) => /портфолио|галерея|кейсы/i.test(b)) },
@@ -191,7 +192,8 @@ export default function CatalogPage() {
               <nav className="hidden md:flex items-center gap-8 text-xs font-semibold tracking-widest uppercase text-neutral-300">
                 <a href="#catalog" className="hover:text-white transition-colors">Каталог</a>
                 <a href="#how" className="hover:text-white transition-colors">Как работаем</a>
-                <a href="https://t.me/vzbbme" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Контакты</a>
+                <a href="#faq" className="hover:text-white transition-colors">Вопросы</a>
+                <a href="#order" className="hover:text-white transition-colors">Заказать</a>
               </nav>
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
             </div>
@@ -277,7 +279,7 @@ export default function CatalogPage() {
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                 {searchBox(false)}
                 <div className="flex items-center gap-2 px-3 py-2 bg-neutral-950/50 rounded-full border border-white/10 shrink-0">
                   <ArrowUpDown className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
@@ -424,10 +426,77 @@ export default function CatalogPage() {
                   Клиент выбирает услугу, мастера и свободное время, подтверждает запись по почте и сам переносит её в личном кабинете. Вы видите всё в CRM. Попробуйте в демо барбершопа, стоматологии или ветклиники.
                 </p>
               </div>
-              <a href="https://t.me/vzbbme" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-black text-white rounded-full text-xs font-extrabold uppercase tracking-wider hover:bg-neutral-800 text-center">
+              <a href="#order" className="px-8 py-4 bg-black text-white rounded-full text-xs font-extrabold uppercase tracking-wider hover:bg-neutral-800 text-center">
                 Заказать проект
               </a>
             </div>
+          </div>
+        </section>
+
+
+        {/* КТО ДЕЛАЕТ */}
+        <section className="px-4 sm:px-6 md:px-16 pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-16 items-start border-t border-white/10 pt-16">
+            <div>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-neutral-500 mb-4">Кто делает</p>
+              <h2 className="text-3xl sm:text-5xl font-black tracking-tighter uppercase mb-6">Небольшая студия, а не конвейер</h2>
+              <p className="text-base text-neutral-300 leading-relaxed mb-4 max-w-xl">Каждый сайт в каталоге сделан руками и под конкретную нишу: у барбершопа — афиша и отрывные листочки, у автосервиса — заказ-наряд, у ветклиники — паспорт питомца. Никаких конструкторов и одинаковых блоков.</p>
+              <p className="text-base text-neutral-400 leading-relaxed max-w-xl">Работаем из Харькова и Гданьска, сайты делаем на русском, украинском, польском и английском. Общаемся в Telegram — без менеджеров и созвонов ради созвонов.</p>
+            </div>
+            <dl className="grid grid-cols-2 gap-px bg-white/10 rounded-[2rem] overflow-hidden border border-white/10">
+              {[[templates.length, 'готовых сайтов в каталоге'], ['1–3 дня', 'запуск готового шаблона'], ['30 дней', 'поддержки после запуска'], ['100%', 'код и домен — ваши']].map(([n, t]) => (
+                <div key={t} className="bg-[#0b0b0b] p-6 sm:p-8">
+                  <dt className="text-3xl sm:text-4xl font-black tracking-tight">{n}</dt>
+                  <dd className="text-xs sm:text-sm text-neutral-400 mt-2">{t}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        {/* ВОПРОСЫ */}
+        <section id="faq" className="px-4 sm:px-6 md:px-16 pb-24 scroll-mt-28">
+          <div className="border-t border-white/10 pt-16 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8">
+            <div>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-neutral-500 mb-4">Вопросы</p>
+              <h2 className="text-3xl sm:text-5xl font-black tracking-tighter uppercase">Что обычно спрашивают</h2>
+            </div>
+            <div className="border-t border-white/10">
+              <details key="0" className="group border-b border-white/10 py-5">
+                <summary className="flex justify-between items-center gap-6 cursor-pointer list-none text-base sm:text-lg font-bold [&::-webkit-details-marker]:hidden">Это шаблон или сайт под меня?<span className="text-2xl text-neutral-500 group-open:rotate-45 transition-transform">+</span></summary>
+                <p className="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-3xl">Сайт под вас. Шаблон — проверенная основа: структура, вёрстка и логика уже работают. Мы меняем тексты, услуги, цены, фото, цвета и поля записи. Поэтому быстрее и дешевле, чем с нуля.</p>
+              </details>
+              <details key="1" className="group border-b border-white/10 py-5">
+                <summary className="flex justify-between items-center gap-6 cursor-pointer list-none text-base sm:text-lg font-bold [&::-webkit-details-marker]:hidden">Что входит в цену?<span className="text-2xl text-neutral-500 group-open:rotate-45 transition-transform">+</span></summary>
+                <p className="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-3xl">Перенос вашего контента, адаптация под бренд, настройка домена и SSL, аналитика, адаптив под телефоны и 30 дней поддержки. Цена в карточке — за запуск под ключ.</p>
+              </details>
+              <details key="2" className="group border-b border-white/10 py-5">
+                <summary className="flex justify-between items-center gap-6 cursor-pointer list-none text-base sm:text-lg font-bold [&::-webkit-details-marker]:hidden">Как работает онлайн-запись?<span className="text-2xl text-neutral-500 group-open:rotate-45 transition-transform">+</span></summary>
+                <p className="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-3xl">Клиент выбирает услугу, специалиста и свободное время. Занятое время выбрать нельзя. Подтверждение приходит на почту, перенести запись можно в личном кабинете. Вам — CRM со статусами и журналом.</p>
+              </details>
+              <details key="3" className="group border-b border-white/10 py-5">
+                <summary className="flex justify-between items-center gap-6 cursor-pointer list-none text-base sm:text-lg font-bold [&::-webkit-details-marker]:hidden">Сколько стоит содержание сайта?<span className="text-2xl text-neutral-500 group-open:rotate-45 transition-transform">+</span></summary>
+                <p className="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-3xl">Для небольшого бизнеса обычно хватает бесплатных тарифов хостинга. Платите только за домен — от $10 в год. Всё регистрируем на вас.</p>
+              </details>
+              <details key="4" className="group border-b border-white/10 py-5">
+                <summary className="flex justify-between items-center gap-6 cursor-pointer list-none text-base sm:text-lg font-bold [&::-webkit-details-marker]:hidden">Можно ли поменять дизайн шаблона?<span className="text-2xl text-neutral-500 group-open:rotate-45 transition-transform">+</span></summary>
+                <p className="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-3xl">Да. Цвета, шрифты, блоки и порядок секций — под ваш бренд. Если нужно совсем иначе — сделаем свой дизайн с нуля, это отдельная цена.</p>
+              </details>
+              <details key="5" className="group border-b border-white/10 py-5">
+                <summary className="flex justify-between items-center gap-6 cursor-pointer list-none text-base sm:text-lg font-bold [&::-webkit-details-marker]:hidden">Моей ниши нет в каталоге<span className="text-2xl text-neutral-500 group-open:rotate-45 transition-transform">+</span></summary>
+                <p className="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-3xl">Наберите её в поиске — покажем ближайшие проекты из вашей отрасли. Или заполните форму ниже, обсудим в Telegram.</p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        {/* ЗАКАЗ */}
+        <section id="order" className="px-4 sm:px-6 md:px-16 pb-24 scroll-mt-28">
+          <div className="rounded-[2.5rem] border border-white/10 bg-neutral-900/40 p-6 sm:p-10 md:p-14">
+            <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-neutral-500 mb-4">Заказать</p>
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tighter uppercase mb-3">Расскажите о бизнесе</h2>
+            <p className="text-sm sm:text-base text-neutral-400 mb-10 max-w-2xl">Заполните, что знаете, — соберём сообщение и откроем Telegram. Ответим в течение пары часов и назовём точную цену.</p>
+            <OrderForm />
           </div>
         </section>
 
