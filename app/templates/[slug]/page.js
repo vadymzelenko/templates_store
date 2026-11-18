@@ -4,6 +4,7 @@ import React, { use, useState } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { templates } from '@/lib/templates';
+import { industryOf, tgLink } from '@/lib/search';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import {
@@ -19,6 +20,9 @@ export default function TemplateDetailPage({ params }) {
     if (!template) notFound();
 
     const [isCopied, setIsCopied] = useState(false);
+    const industry = industryOf(template.industry);
+    const telegram = template.telegramUrl || tgLink(`Привет! Хочу сайт как «${template.title}» (${template.price}). Мой бизнес: `);
+    const similar = templates.filter((t) => t.industry === template.industry && t.slug !== template.slug).slice(0, 3);
 
     const handleCopyLink = () => {
         navigator.clipboard.writeText(window.location.href);
@@ -119,16 +123,37 @@ export default function TemplateDetailPage({ params }) {
                                 <img
                                     src={template.coverImage}
                                     alt={template.title}
-                                    className="w-full object-cover block relative z-0 transition-transform duration-700 group-hover:scale-[1.02]"
+                                    className={`w-full object-cover block relative z-0 ${template.coverImage.startsWith('/previews') ? 'aspect-[4/3] object-top' : ''} transition-transform duration-700 group-hover:scale-[1.02]`}
                                 />
                             </div>
+
+                            {/* Возможности шаблона */}
+                            {template.features?.length > 0 && (
+                                <section className="bg-neutral-900/60 backdrop-blur-2xl p-6 sm:p-8 rounded-[2rem] border border-white/10 shadow-xl space-y-6">
+                                    <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-wider flex items-center gap-3">
+                                        <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" /> Что умеет сайт
+                                    </h2>
+                                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                                        {template.features.map((f) => (
+                                            <li key={f} className="flex items-start gap-3 p-3 sm:p-4 rounded-[1.5rem] bg-white/5 border border-white/10 px-4 sm:px-5 text-xs sm:text-sm font-semibold text-neutral-200">
+                                                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0 mt-0.5" />{f}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    {template.fits?.length > 0 && (
+                                        <p className="text-xs sm:text-sm text-neutral-400 font-medium">
+                                            Легко переделать под: <span className="text-neutral-200">{template.fits.join(', ')}</span>
+                                        </p>
+                                    )}
+                                </section>
+                            )}
 
                             {/* Детали шаблона */}
                             <section className="bg-neutral-900/60 backdrop-blur-2xl p-6 sm:p-8 rounded-[2rem] border border-white/10 shadow-xl space-y-4">
                                 <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-wider flex items-center gap-3">
                                     <Code2 className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400" /> Детали шаблона
                                 </h2>
-                                <p className="text-neutral-300 leading-relaxed text-sm sm:text-base font-medium">
+                                <p className="text-neutral-300 leading-relaxed text-sm sm:text-base font-medium whitespace-pre-line">
                                     {template.description}
                                 </p>
                             </section>
@@ -195,7 +220,7 @@ export default function TemplateDetailPage({ params }) {
 
                                 <div className="space-y-3">
                                     <a
-                                        href={template.telegramUrl}
+                                        href={telegram}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-full py-3.5 sm:py-4 bg-white hover:bg-neutral-200 text-black rounded-full font-extrabold uppercase tracking-wider text-[10px] sm:text-xs transition-all flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-95"
@@ -210,7 +235,7 @@ export default function TemplateDetailPage({ params }) {
                                         className="w-full py-3.5 sm:py-4 bg-transparent hover:bg-white/5 text-white rounded-full font-extrabold uppercase tracking-wider text-[10px] sm:text-xs transition-all border border-white/20 flex items-center justify-center gap-2"
                                     >
                                         <ExternalLink className="w-4 h-4" />
-                                        Открыть Live Demo
+                                        {template.liveDemoUrl.includes('github.com') ? 'Код на GitHub' : 'Открыть живое демо'}
                                     </a>
                                 </div>
 
@@ -227,12 +252,20 @@ export default function TemplateDetailPage({ params }) {
                                     </div>
                                 </div>
 
-                                <div className="pt-6 border-t border-white/10 text-center">
-                                    <div className="inline-flex items-center gap-2 text-[9px] sm:text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
-                                        <Flame className="w-3.5 h-3.5 text-amber-500 animate-bounce" />
-                                        Горячее предложение недели
+                                {similar.length > 0 && (
+                                    <div className="pt-6 border-t border-white/10 space-y-3">
+                                        <div className="text-[10px] sm:text-xs font-black text-white uppercase tracking-widest">
+                                            Ещё в отрасли «{industry?.name}»
+                                        </div>
+                                        {similar.map((t) => (
+                                            <Link key={t.slug} href={`/templates/${t.slug}`} className="flex items-center gap-3 p-2 rounded-2xl hover:bg-white/5 transition-colors">
+                                                <img src={t.coverImage} alt="" className="w-16 h-12 rounded-xl object-cover object-top border border-white/10" />
+                                                <span className="flex-1 text-xs font-bold text-neutral-200">{t.title}</span>
+                                                <span className="text-xs font-extrabold text-neutral-400">{t.price}</span>
+                                            </Link>
+                                        ))}
                                     </div>
-                                </div>
+                                )}
                             </div>
                         </motion.div>
 
@@ -250,9 +283,8 @@ export default function TemplateDetailPage({ params }) {
                             </div>
                             <div className="hidden md:block w-px h-4 bg-white/10" />
                             <div className="flex items-center gap-4 sm:gap-6 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-neutral-400">
-                                <Link href="#" className="hover:text-white transition-colors">Портфолио</Link>
-                                <Link href="#" className="hover:text-white transition-colors">Услуги</Link>
-                                <a href="https://t.me/your_username" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Telegram</a>
+                                <Link href="/#catalog" className="hover:text-white transition-colors">Каталог</Link>
+                                <a href="https://t.me/vzbbme" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Telegram</a>
                             </div>
                         </div>
 

@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Template Store — витрина готовых сайтов
 
-## Getting Started
+Next.js 16 + Tailwind 4 + Framer Motion. Деплой — Vercel (ветка `main`).
 
-First, run the development server:
+## Что где
+| Путь | Что это |
+|---|---|
+| `app/page.js` | Витрина: поиск по нише, фильтры по отраслям и возможностям, каталог, «Как работаем» |
+| `app/templates/[slug]/page.js` | Страница шаблона: цена, что умеет, детали, похожие, кнопки «Обсудить в Telegram» и «Живое демо» |
+| `lib/templates.js` | База шаблонов (лёгкая CMS) — **сюда добавлять новые карточки** |
+| `lib/industries.js` | 22 отрасли и ~300 ниш, по ним работает поиск |
+| `lib/search.js` | Логика поиска и ссылка на Telegram |
+| `public/projects/**` | HTML-лендинги |
+| `app/demo/*` | Демо на Next.js с рабочей онлайн-записью (демо-режим) |
+| `public/previews/*.jpg` | Обложки карточек |
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Как добавить шаблон
+1. Положите HTML в `public/projects/<папка>/<файл>.html` (или сделайте страницу в `app/demo/<slug>`).
+2. Добавьте объект в `lib/templates.js`:
+   - `industry` — ключ отрасли из `lib/industries.js` (`beauty`, `medicine`, `auto`, `food` …);
+   - `category` — ниша, которая видна на карточке;
+   - `badges` — короткие метки («Онлайн-запись», «Калькулятор», «Портфолио» — по ним работают фильтры);
+   - `fits` — ниши, под которые шаблон легко переделать (поиск покажет его и по ним);
+   - `liveDemoUrl` — относительный путь (`/projects/...html` или `/demo/...`);
+   - `coverImage` — `/previews/<slug>.jpg` или любая ссылка на картинку.
+3. Обложка: `npm run dev`, затем `npm run previews` — снимет первый экран всех шаблонов с `coverImage: /previews/...`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`telegramUrl` можно оставить пустым — кнопка сама откроет чат @vzbbme с готовым текстом.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Демо с онлайн-записью
+`/demo/barbershop`, `/demo/dental`, `/demo/autoservice`, `/demo/coffee`, `/demo/renovation`, `/demo/vet`, `/demo/photo-studio`.
+Виджет записи — `components/demo/DemoBooking.js` (ведёт себя как booking engine, но ничего не отправляет).
+Рабочий booking engine (Supabase, magic link, кабинет, CRM) лежит в ветке `supabase-crm-landings` и подключается к проекту клиента при заказе.
