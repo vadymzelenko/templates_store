@@ -25,3 +25,8 @@ for (const p of projects) {
   await page.close();
 }
 await browser.close();
+
+// Список готовых превью для главной
+const done = projects.map((p) => p.slug).filter((s) => fs.existsSync(path.join(out, `${s}.jpg`)));
+fs.writeFileSync(path.resolve('store/previews.json'), JSON.stringify(done) + '\n');
+console.log(`store/previews.json: ${done.length}`);
