@@ -54,12 +54,15 @@ drop view if exists bookings_readable;
 create view bookings_readable with (security_invoker = true) as
 select
   id, status, created_at,
-  data->>'format' as "format",
+  data->>'project' as "project",
+  data->>'industry' as "industry",
+  data->>'package' as "package",
   slot_date as "date",
   slot_time as "time",
   client_name as "name",
   client_email as "email",
-  data->>'contact' as "contact"
+  data->>'contact' as "contact",
+  data->>'comment' as "comment"
 from bookings;
 
 -- View не має віддаватись через публічний API

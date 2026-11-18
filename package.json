@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "db:sql": "node scripts/make-schema.mjs"
+    "db:sql": "node scripts/make-schema.mjs",
+    "previews": "node scripts/previews.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

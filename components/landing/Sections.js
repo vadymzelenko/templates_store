@@ -1,11 +1,7 @@
-// Секції лендингу. Весь контент береться з business/landing.js
-import config from '@/engine.config';
-import BookingForm from '../BookingForm';
+// Секції лендингу на booking engine. Контент передається пропсом L (див. demos/photo-studio.js).
 import PickButton from '../PickButton';
 
-const L = config.landing;
-
-export function Hero() {
+export function Hero({ L, brandName }) {
   return (
     <section className="hero">
       <div>
@@ -19,7 +15,7 @@ export function Hero() {
       </div>
 
       <div className="sheet" aria-hidden="true">
-        <div className="sheet-title"><span>{config.brand.name}</span><span>{L.sheetTitle}</span></div>
+        <div className="sheet-title"><span>{brandName}</span><span>{L.sheetTitle}</span></div>
         <div className="sheet-grid">
           {L.frames.map((f, i) => (
             <figure key={i} className={`frame${f.pick ? ' pick' : ''}`} style={{ '--a': f.a, '--b': f.b }}>
@@ -35,12 +31,12 @@ export function Hero() {
   );
 }
 
-export function Formats() {
+export function Formats({ L, formats }) {
   return (
     <section id="formats" className="section">
       <h2>{L.formatsSection.title}</h2>
       <ul className="formats-list">
-        {config.formats.map((f) => (
+        {formats.map((f) => (
           <li key={f.name}>
             <div className="f-info">
               <h3 className="f-name">{f.name}</h3>
@@ -58,7 +54,7 @@ export function Formats() {
   );
 }
 
-export function Steps() {
+export function Steps({ L }) {
   return (
     <section className="section">
       <h2>{L.steps.title}</h2>
@@ -71,7 +67,7 @@ export function Steps() {
   );
 }
 
-export function BookingSection() {
+export function BookingSection({ L, form }) {
   return (
     <section id="book" className="section">
       <div className="book">
@@ -84,13 +80,13 @@ export function BookingSection() {
             ))}
           </dl>
         </div>
-        <div className="card book-card"><BookingForm /></div>
+        <div className="card book-card">{form}</div>
       </div>
     </section>
   );
 }
 
-export function Faq() {
+export function Faq({ L }) {
   return (
     <section className="section">
       <h2>{L.faq.title}</h2>
@@ -103,7 +99,7 @@ export function Faq() {
   );
 }
 
-export function Footer() {
+export function Footer({ L }) {
   return (
     <footer className="footer">
       <span>{L.footer.text}</span>

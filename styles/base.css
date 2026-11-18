@@ -1,8 +1,8 @@
 /* Спільна основа: змінні, скидання, кнопки, поля, модалка, бейдж. Кольори й шрифти приходять із business/theme.js */
 :root {
-  --accent:#236a8c; --accentInk:#fff; --bg:#f3f6f8; --card:#fff; --text:#13202b; --muted:#62717d;
-  --line:#dbe3e8; --soft:#e6eef3; --mark:#d9483b; --danger:#b03a2e;
-  --font-display:'Geologica',system-ui,sans-serif; --font-body:'Geologica',system-ui,sans-serif;
+  --accent:#d6411b; --accentInk:#fff; --bg:#f1eee6; --card:#faf8f3; --text:#151412; --muted:#6b665c;
+  --line:#d8d2c4; --soft:#e7e1d3; --mark:#d6411b; --danger:#b03a2e;
+  --font-display:'Golos Text',system-ui,sans-serif; --font-body:'Golos Text',system-ui,sans-serif; --font-mono:ui-monospace,monospace;
   --r-field:10px; --r-card:14px; --r-pill:999px;
 }
 * { box-sizing:border-box; }

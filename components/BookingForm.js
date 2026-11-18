@@ -13,6 +13,13 @@ export default function BookingForm() {
   const [state, setState] = useState('idle'); // idle | sending | sent
   const [msg, setMsg] = useState('');
 
+  // Значення з адреси: /?project=barbershop заповнить поле project
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    const pre = Object.fromEntries(config.fields.filter((f) => p.get(f.key)).map((f) => [f.key, p.get(f.key)]));
+    if (Object.keys(pre).length) setValues((s) => ({ ...pre, ...s }));
+  }, []);
+
   // Кнопка «Обрати» у прайсі лендингу
   useEffect(() => {
     const h = (e) => setValues((s) => ({ ...s, [e.detail.key]: e.detail.value }));

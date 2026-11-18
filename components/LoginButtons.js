@@ -40,8 +40,7 @@ export default function LoginButtons({ loggedIn, isAdmin }) {
   return (
     <>
       <nav className="nav">
-        <button className="btn ghost sm" onClick={() => setOpen(true)}>{T.btnRegistered}</button>
-        <button className="btn sm" onClick={() => setOpen(true)}>{T.btnProfile}</button>
+        <button className="btn ghost sm" onClick={() => setOpen(true)}>{T.btnProfile}</button>
       </nav>
       {open && (
         <div className="modal-bg" onClick={() => setOpen(false)}>
