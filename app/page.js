@@ -12,8 +12,9 @@ import SmartSearch from '@/components/store/SmartSearch';
 import Card from '@/components/store/Card';
 import HowWeWork from '@/components/store/HowWeWork';
 import OrderWizard from '@/components/store/OrderWizard';
+import Cursor from '@/components/ui/Cursor';
 
-const QUICK = ['Барбершоп', 'Стоматология', 'Автосервис', 'Кофейня', 'Фитнес', 'Юрист', 'Клининг', 'Отель', 'Ветклиника', 'Фотограф'];
+const QUICK = ['Барбершоп', 'Стоматология', 'Автосервис', 'Кофейня', 'Фитнес', 'Клининг', 'Отель', 'Ветклиника', 'Фотограф'];
 
 const FEATURES = [
   { key: 'booking', label: 'Онлайн-запись', icon: CalendarCheck, test: (t) => (t.badges || []).some((b) => /запис|booksy|брон/i.test(b)) },
@@ -92,12 +93,29 @@ export default function CatalogPage() {
   const reset = () => { setIndustry('all'); setFeature(null); setQuery(''); };
   const go = (q) => { setQuery(q); setIndustry('all'); scrollToId('catalog'); };
 
+  // Шапка прячется при прокрутке вниз и возвращается при прокрутке вверх
+  const [headHidden, setHeadHidden] = useState(false);
+  useEffect(() => {
+    let last = window.scrollY, ticking = false;
+    const on = () => {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (Math.abs(y - last) > 6) { setHeadHidden(y > last && y > 160); last = y; }
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', on, { passive: true });
+    return () => window.removeEventListener('scroll', on);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#050505] p-2 font-sans text-white antialiased selection:bg-white selection:text-black md:p-4">
       <div className="relative rounded-[28px] border border-white/10 bg-[#0b0b0b] md:rounded-[44px]">
 
         {/* Шапка */}
-        <header className="fixed left-0 right-0 top-4 z-40 flex justify-center px-3 md:top-7">
+        <Cursor />
+        <header className={`fixed left-0 right-0 top-3 z-40 flex justify-center px-3 transition-transform duration-500 ease-[cubic-bezier(.2,.7,.2,1)] md:top-5 ${headHidden ? '-translate-y-[140%]' : 'translate-y-0'}`}>
           <div className="flex items-center gap-5 rounded-full border border-white/15 bg-neutral-900/60 px-5 py-2.5 shadow-2xl backdrop-blur-xl sm:gap-7 sm:px-6">
             <Link href="/" className="text-sm font-bold uppercase tracking-wider">ШАБЛОНЫ<span className="text-neutral-400">САЙТОВ.</span></Link>
             <nav className="hidden items-center gap-7 text-xs font-semibold uppercase tracking-widest text-neutral-300 md:flex">
@@ -128,7 +146,7 @@ export default function CatalogPage() {
 
         {/* Каталог */}
         <main id="catalog" className="scroll-mt-24 px-3 pb-24 pt-10 sm:px-6 md:px-12 lg:px-16">
-          <div className="sticky top-[72px] z-30 mb-8 rounded-[1.75rem] border border-white/10 bg-neutral-950/80 p-2.5 shadow-2xl backdrop-blur-xl md:top-[88px]">
+          <div className={`relative lg:sticky z-30 mb-8 rounded-[1.75rem] border border-white/10 bg-[#111] p-2.5 shadow-[0_20px_40px_-20px_rgba(0,0,0,.9)] transition-[top] duration-500 ease-[cubic-bezier(.2,.7,.2,1)] ${headHidden ? 'lg:top-3' : 'lg:top-[80px]'}`}>
             <div className="flex gap-1.5 overflow-x-auto [scrollbar-width:none]">
               <button onClick={() => setIndustry('all')} className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold transition-all ${industry === 'all' ? 'bg-white text-black' : 'text-neutral-400 hover:bg-white/5 hover:text-white'}`}>Все <span className="opacity-50">{templates.length}</span></button>
               {tabs.map((i) => (
