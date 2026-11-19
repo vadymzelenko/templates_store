@@ -1,0 +1,19 @@
+/* База пошаговой формы. Цвета задают переменные --stp-accent, --stp-ink, --stp-bg, --stp-line на обёртке */
+:where(.stp) { --stp-accent:#111; --stp-ink:#fff; --stp-line:rgba(0,0,0,.12); }
+.stp { position:relative; }
+.stp-top { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.stp-bar { flex:1; height:4px; background:var(--stp-line); border-radius:4px; overflow:hidden; }
+.stp-bar i { display:block; height:100%; background:var(--stp-accent); transition:width .45s cubic-bezier(.3,.7,.2,1); }
+.stp-count { font-size:.8rem; opacity:.65; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.stp-view { overflow:hidden; transition:height .45s cubic-bezier(.65,0,.25,1); }
+.stp-track { display:flex; align-items:flex-start; transition:transform .55s cubic-bezier(.65,0,.25,1); }
+.stp-slide { flex:0 0 100%; min-width:0; padding:2px; box-sizing:border-box; }
+.stp-title { margin:0 0 6px; font-size:1.35rem; line-height:1.2; }
+.stp-hint { margin:0 0 16px; opacity:.7; font-size:.95rem; }
+.stp-nav { display:flex; justify-content:space-between; gap:10px; margin-top:20px; }
+.stp-back { font:inherit; background:none; border:0; padding:10px 0; cursor:pointer; color:inherit; opacity:.7; }
+.stp-back:disabled { visibility:hidden; }
+.stp-next { font:inherit; font-weight:700; background:var(--stp-accent); color:var(--stp-ink); border:0; padding:12px 22px; border-radius:var(--stp-radius, 999px); cursor:pointer; transition:transform .15s, opacity .2s; }
+.stp-next:hover:not(:disabled) { transform:translateY(-1px); }
+.stp-next:disabled { opacity:.35; cursor:not-allowed; }
+@media (prefers-reduced-motion:reduce) { .stp-track, .stp-bar i { transition:none; } }

@@ -2,8 +2,12 @@ import './forest.css';
 import DemoBar from '@/components/demo/DemoBar';
 import Stay from './Stay';
 import { day } from './data';
+import Reveal from '@/components/demo/Reveal';
+import Reviews from '@/components/demo/Reviews';
+import Photo from '@/components/ui/Photo';
+import { P } from '@/lib/photos';
 
-export const metadata = { title: 'Сосны — глэмпинг · демо', description: 'Демо-лендинг глэмпинга: ночной лес и бронирование шатра по датам' };
+export const metadata = { title: 'Сосны — глэмпинг', description: 'Сайт глэмпинга: ночной лес и бронирование шатра по датам' };
 
 function Night() {
   const stars = Array.from({ length: 70 }, (_, i) => [(i * 137.5) % 1200, (i * 53) % 330, (i % 3) + 1]);
@@ -47,11 +51,28 @@ export default function Glamping() {
         <p className="gl-sub">Цена — за ночь в шатре. Пятница и суббота дороже, зачёркнутые ночи уже заняты.</p>
         <Stay />
       </section>
+      <section className="gl-gallery" aria-label="Фото глэмпинга">
+        <div className="gl-gal-row" data-lenis-prevent>
+          {[['tentNight', 'Купол ночью', 'tall'], ['lake', 'Озеро в 7 утра', ''], ['campfire', 'Костровая', ''], ['tent', 'Сафари-тент', 'tall']].map(([k, cap, cls], i) => (
+            <Reveal key={k} delay={i * 0.06} className={`gl-gal-item ${cls}`}><Photo id={P[k]} w={1000} alt={cap} fallback="#1d2c52" /><span>{cap}</span></Reveal>
+          ))}
+        </div>
+      </section>
+
       <section className="gl-sec gl-day">
         <h2>Один день в Соснах</h2>
         <ol>{day.map(([t, x]) => <li key={t}><time>{t}</time><span>{x}</span></li>)}</ol>
       </section>
-      <footer className="gl-foot">Сосны · Киевская обл., Иванковский р-н · +380 00 000 00 00<br />Демо-проект Template Store. Глэмпинг вымышлен.</footer>
+      <section className="gl-sec">
+        <h2>Гости пишут</h2>
+        <Reviews className="gl-rv" fallback="#1d2c52" items={[
+          { name: 'Марта и Олег', meta: 'Купол, 2 ночи', photo: P.face12, text: 'Лежали в кровати и смотрели на звёзды через потолок. Утром — кофе на веранде и туман над озером. Вернёмся летом.' },
+          { name: 'Семья Ткачей', meta: 'А-фрейм, 3 ночи', photo: P.face5, text: 'Дети не вспомнили про планшеты ни разу: сап, велосипеды, костёр. Банный чан — отдельный восторг.' },
+          { name: 'Катя', meta: 'Сафари-тент, день рождения', photo: P.face2, text: 'Отмечали с подругами. Ребята украсили шатёр и спрятали торт в домике у костра. Очень тепло.' },
+        ]} />
+      </section>
+
+      <footer className="gl-foot">Сосны · Киевская обл., Иванковский р-н · +380 00 000 00 00<br />© Сосны, {new Date().getFullYear()}</footer>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function Sentence() {
     return (
       <div className="lt-done" role="status">
         <p>{name}, ждём вас <b>{dayLabel(s.date)}</b> в <b>{s.time}</b>{docObj ? <> у {docObj.name}</> : null}.</p>
-        <p className="lt-small">Это демо, поэтому никуда ничего не отправилось. В рабочей версии на почту приходит письмо-подтверждение, а перенести приём можно в личном кабинете.</p>
+        <p className="lt-small">Подтверждение придёт на почту, перенести приём можно по ссылке из письма. Напомним за день.</p>
         <button type="button" onClick={() => { setDone(false); s.setTime(''); }}>← исправить</button>
       </div>
     );
@@ -61,7 +61,6 @@ export default function Sentence() {
       </p>
       {err && <p className="lt-err" role="alert">{err}</p>}
       <button className="lt-send">Отправить запись</button>
-      <span className="lt-small"> демо-режим, ничего не отправляется</span>
     </form>
   );
 }

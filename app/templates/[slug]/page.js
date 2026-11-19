@@ -120,11 +120,15 @@ export default function TemplateDetailPage({ params }) {
                             {/* Обложка без отступов (картинка заливает блок) */}
                             <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative group bg-neutral-900">
                                 <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10" />
+                                <a href={template.liveDemoUrl} {...(template.liveDemoUrl.startsWith('/') ? {} : { target: '_blank', rel: 'noopener noreferrer' })} aria-label="Открыть сайт" className="block">
                                 <img
-                                    src={template.coverImage}
+                                    src={template.liveDemoUrl.startsWith('/demo/') ? `/previews/tall/${template.slug}.jpg` : template.coverImage}
+                                    onError={(e) => { if (!e.currentTarget.dataset.f) { e.currentTarget.dataset.f = 1; e.currentTarget.src = template.coverImage; } }}
                                     alt={template.title}
-                                    className={`w-full object-cover block relative z-0 ${template.coverImage.startsWith('/previews') ? 'aspect-[4/3] object-top' : ''} transition-transform duration-700 group-hover:scale-[1.02]`}
+                                    className={`w-full object-cover block relative z-0 ${template.liveDemoUrl.startsWith('/demo/') ? 'aspect-[4/3] object-top transition-[object-position] duration-[6s] ease-in-out group-hover:object-bottom' : template.coverImage.startsWith('/previews') ? 'aspect-[4/3] object-top' : 'transition-transform duration-700 group-hover:scale-[1.02]'}`}
                                 />
+                                <span className="absolute left-1/2 bottom-5 -translate-x-1/2 z-20 rounded-full bg-white px-5 py-2.5 text-xs font-bold text-black shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">Открыть сайт ↗</span>
+                                </a>
                             </div>
 
                             {/* Возможности шаблона */}

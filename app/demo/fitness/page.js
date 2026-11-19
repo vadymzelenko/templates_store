@@ -1,9 +1,13 @@
 import './timetable.css';
 import DemoBar from '@/components/demo/DemoBar';
 import Timetable from './Timetable';
+import Reveal from '@/components/demo/Reveal';
+import Reviews from '@/components/demo/Reviews';
+import Photo from '@/components/ui/Photo';
+import { P } from '@/lib/photos';
 import { coaches, passes } from './data';
 
-export const metadata = { title: 'Тяга — фитнес-студия · демо', description: 'Демо-лендинг фитнес-студии: расписание недели на первом экране и запись в один клик' };
+export const metadata = { title: 'Тяга — фитнес-студия', description: 'Сайт фитнес-студии: расписание недели на первом экране и запись в один клик' };
 
 export default function Fitness() {
   return (
@@ -20,13 +24,28 @@ export default function Fitness() {
       <h1 className="ty-h">Неделя</h1>
       <Timetable />
 
+      <section className="ty-band" aria-label="Студия">
+        {[['pilates', 'Пилатес на реформерах'], ['workout', 'Функционал в малых группах'], ['yoga', 'Растяжка по вечерам'], ['gym', 'Зал 220 м² с окнами в пол']].map(([k, cap], i) => (
+          <Reveal key={k} delay={i * 0.07} className="ty-band-item"><Photo id={P[k]} w={800} alt={cap} fallback="#d9d5cc" /><span>{cap}</span></Reveal>
+        ))}
+      </section>
+
       <section className="ty-coaches">
         <h2>Тренеры</h2>
         <ol>
           {coaches.map((c) => (
-            <li key={c.name}><span className="ty-cn">{c.name}</span><div><b>{c.full}</b><p>{c.does}</p></div></li>
+            <li key={c.name}><Photo id={P[c.photo]} w={400} alt={c.full} className="ty-cphoto" fallback="#d9d5cc" /><div><span className="ty-cn">{c.name}</span><b>{c.full}</b><p>{c.does}</p></div></li>
           ))}
         </ol>
+      </section>
+
+      <section className="ty-reviews">
+        <h2>После месяца в Тяге</h2>
+        <Reviews className="ty-rv" fallback="#d9d5cc" items={[
+          { name: 'Катя, 34', meta: 'пилатес 2 раза в неделю', photo: P.face2, text: 'Спина перестала болеть к третьей неделе. Ира замечает каждую мелочь, хотя в группе восемь человек.' },
+          { name: 'Дима, 41', meta: 'функционал + бокс', photo: P.face5, text: 'Бронирую тренировки с телефона по дороге с работы. Видно, сколько мест осталось — не надо писать администратору.' },
+          { name: 'Оля, 27', meta: 'растяжка', photo: P.face10, text: 'Села на продольный шпагат за четыре месяца. Лена — лучший тренер по растяжке, что у меня был.' },
+        ]} />
       </section>
 
       <section className="ty-passes">
@@ -47,7 +66,7 @@ export default function Fitness() {
 
       <footer className="ty-foot">
         <span>ТЯГА · ул. Мельникова, 18 · +380 00 000 00 00</span>
-        <span>Демо-проект Template Store. Студия и тренеры вымышлены.</span>
+        <span>© Тяга, {new Date().getFullYear()}</span>
       </footer>
     </div>
   );

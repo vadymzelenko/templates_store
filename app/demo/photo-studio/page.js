@@ -6,7 +6,7 @@ import DemoBooking from '@/components/demo/DemoBooking';
 import { Hero, Formats, Steps, BookingSection, Faq, Footer } from '@/components/landing/Sections';
 import { landing as L, formats, brand } from '@/demos/photo-studio';
 
-export const metadata = { title: 'Studio Light — фотостудия · демо', description: 'Демо-лендинг фотостудии на booking engine' };
+export const metadata = { title: 'Studio Light — фотостудия', description: 'Сайт фотостудии на booking engine' };
 
 const vars = {
   '--accent': '#236a8c', '--accentInk': '#fff', '--bg': '#f3f6f8', '--card': '#fff', '--text': '#13202b', '--muted': '#62717d',

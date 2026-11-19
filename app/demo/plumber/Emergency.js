@@ -49,7 +49,7 @@ export default function Emergency() {
             <p className="pl-sent-h">Мастер выезжает</p>
             <p className="pl-timer">{String(Math.floor(left / 60)).padStart(2, '0')}:{String(left % 60).padStart(2, '0')}</p>
             <p>Перезвоним на {phone} в течение 2 минут. {prob ? `Возьмём всё для: «${prob.name.toLowerCase()}».` : ''}</p>
-            <p className="pl-small">Демо-режим: заявка никуда не отправлена, таймер для примера.</p>
+            <p className="pl-small">Мастер позвонит, когда будет подъезжать.</p>
           </div>
         ) : (
           <>

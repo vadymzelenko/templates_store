@@ -1,6 +1,7 @@
 'use client';
 // Слайдер «до/после» по нарисованной комнате: тянем ручку — грязь стирается
 import { useState } from 'react';
+import { MoveHorizontal } from 'lucide-react';
 
 function Room({ dirty }) {
   return (
@@ -47,7 +48,7 @@ export default function BeforeAfter() {
     <div className="cl-ba">
       <Room dirty={false} />
       <div className="cl-ba-dirty" style={{ clipPath: `inset(0 ${100 - x}% 0 0)` }}><Room dirty /></div>
-      <div className="cl-ba-handle" style={{ left: `${x}%` }} aria-hidden="true"><span>⟷</span></div>
+      <div className="cl-ba-handle" style={{ left: `${x}%` }} aria-hidden="true"><span><MoveHorizontal size={26} strokeWidth={2.5} /></span></div>
       <span className="cl-ba-tag l">до</span><span className="cl-ba-tag r">после</span>
       <input type="range" min="0" max="100" value={x} onChange={(e) => setX(+e.target.value)} aria-label="Сравнить до и после уборки" />
     </div>

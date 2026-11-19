@@ -2,9 +2,13 @@
 // Весь сайт — папка «Дело» с вкладками. Вкладка = раздел.
 import { useState } from 'react';
 import useSlots, { dayLabel } from '@/components/demo/useSlots';
-import { lawyers, cases, prices } from './data';
+import { lawyers, cases, prices, letters } from './data';
+import { Square, SquareCheck, PenLine } from 'lucide-react';
+import Photo from '@/components/ui/Photo';
+import Reviews from '@/components/demo/Reviews';
+import { P } from '@/lib/photos';
 
-const TABS = [['case', 'Дело'], ['what', 'С чем работаем'], ['price', 'Стоимость'], ['how', 'Как проходит'], ['apply', 'Заявление']];
+const TABS = [['case', 'Дело'], ['what', 'Адвокаты'], ['price', 'Стоимость'], ['how', 'Как проходит'], ['letters', 'Отзывы'], ['apply', 'Заявление']];
 
 export default function Folder() {
   const [tab, setTab] = useState('case');
@@ -25,6 +29,7 @@ export default function Folder() {
         {tab === 'what' && <WhatTab />}
         {tab === 'price' && <PriceTab />}
         {tab === 'how' && <HowTab />}
+        {tab === 'letters' && <LettersTab />}
         {tab === 'apply' && <Apply c={c} law={law} />}
       </div>
     </div>
@@ -40,7 +45,7 @@ function CaseTab({ sit, setSit, c, law, go }) {
       <p className="lf-label">Суть обращения:</p>
       <div className="lf-sits">
         {cases.map((x) => (
-          <button key={x.key} type="button" aria-pressed={sit === x.key} onClick={() => setSit(x.key)}>{sit === x.key ? '☒' : '☐'} {x.title}</button>
+          <button key={x.key} type="button" aria-pressed={sit === x.key} onClick={() => setSit(x.key)}>{sit === x.key ? <SquareCheck size={18} /> : <Square size={18} />} {x.title}</button>
         ))}
       </div>
       <div className="lf-card">
@@ -60,11 +65,11 @@ function CaseTab({ sit, setSit, c, law, go }) {
 function WhatTab() {
   return (
     <div>
-      <h2>С чем работаем</h2>
+      <h2>Адвокаты</h2>
       <div className="lf-people">
         {lawyers.map((l) => (
           <div key={l.key} className="lf-person">
-            <p className="lf-photo" aria-hidden="true">фото<br />3×4</p>
+            <Photo id={P[l.photo]} w={240} alt={l.name} className="lf-photo" fallback="#efe7d3" />
             <div>
               <h3>{l.name}</h3>
               <p className="lf-role">{l.role} · стаж {l.years} лет</p>
@@ -74,7 +79,7 @@ function WhatTab() {
           </div>
         ))}
       </div>
-      <p className="lf-note">✎ Не берём уголовные дела и не работаем «за процент от выигрыша» — честно скажем об этом на первой встрече.</p>
+      <p className="lf-note"><PenLine size={20} /> Не берём уголовные дела и не работаем «за процент от выигрыша» — честно скажем об этом на первой встрече.</p>
     </div>
   );
 }
@@ -86,7 +91,16 @@ function PriceTab() {
       <table className="lf-table">
         <tbody>{prices.map(([n, p], i) => <tr key={n}><td>{i + 1}.</td><td>{n}</td><td>{p}</td></tr>)}</tbody>
       </table>
-      <p className="lf-note">✎ Цену за дело фиксируем в договоре до начала работы. Если на консультации поняли, что вам не нужен адвокат, — так и скажем.</p>
+      <p className="lf-note"><PenLine size={20} /> Цену за дело фиксируем в договоре до начала работы. Если на консультации поняли, что вам не нужен адвокат, — так и скажем.</p>
+    </div>
+  );
+}
+
+function LettersTab() {
+  return (
+    <div>
+      <h2>Письма клиентов</h2>
+      <Reviews className="lf-rv" fallback="#efe7d3" items={letters.map((l) => ({ ...l, photo: P[l.photo] }))} />
     </div>
   );
 }
@@ -134,7 +148,7 @@ function Apply({ c, law }) {
       <div className="lf-sign"><span>Дата: {s.dayList[0] ? dayLabel(s.dayList[0]) : ''}</span><span>Подпись: <i>{name || '________'}</i></span></div>
       {err && <p className="lf-err" role="alert">{err}</p>}
       {done ? (
-        <div className="lf-done" role="status"><span className="lf-stamp big">ЗАРЕГИСТРИРОВАНО</span><p>Консультация {dayLabel(s.date)} в {s.time}, {format}. Демо-режим: заявление никуда не отправлено.</p></div>
+        <div className="lf-done" role="status"><span className="lf-stamp big">ЗАРЕГИСТРИРОВАНО</span><p>Консультация {dayLabel(s.date)} в {s.time}, {format}. Подтвердим по телефону в течение часа.</p></div>
       ) : <button className="lf-go">Подать заявление</button>}
     </form>
   );

@@ -92,7 +92,7 @@ export default function Garage() {
           <div className="g14-stamp-wrap">
             <span className="g14-stamp">ПРИНЯТО</span>
             <p>{car}, {dayLabel(s.date)}, {s.time}. Мастер позвонит, если после диагностики что-то изменится.</p>
-            <p className="g14-demo">Демо-режим: заявка никуда не отправлена.</p>
+            <p className="g14-demo">Подтверждение придёт в Telegram и на почту.</p>
             <button type="button" className="g14-link" onClick={() => { setStep('pick'); s.setTime(''); }}>новый заказ-наряд</button>
           </div>
         )}

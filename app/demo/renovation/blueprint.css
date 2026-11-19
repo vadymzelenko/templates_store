@@ -78,3 +78,20 @@ input.bp-f-v:focus { outline:none; background:rgba(255,211,92,.12); }
 @media (max-width:560px) { .bp-f-row { grid-template-columns:90px 1fr; } }
 .bp-foot { max-width:1240px; margin:0 auto; padding:24px 28px 40px; border-top:2px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:.85rem; opacity:.85; }
 .bp :focus-visible { outline:2px solid var(--hi); outline-offset:2px; }
+
+.bp-objs { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:40px; }
+.bp-obj { position:relative; aspect-ratio:3/4; border:2px solid var(--line); overflow:hidden; }
+.bp-obj img, .bp-obj > span[role=img] { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(.2) sepia(.2) hue-rotate(170deg) saturate(.7); transition:filter .5s, transform .6s; }
+.bp-obj:hover img { filter:none; transform:scale(1.04); }
+.bp-obj-t { position:absolute; left:0; right:0; bottom:0; padding:12px 14px; background:linear-gradient(transparent, rgba(16,42,80,.9)); display:flex; flex-direction:column; }
+.bp-obj-t b { font-family:'Russo One', sans-serif; font-weight:400; } .bp-obj-t span { color:var(--hi); font-size:.9rem; }
+@media (max-width:860px) { .bp-objs { grid-template-columns:1fr 1fr; } }
+.bp-rv { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:2px solid var(--line); }
+.bp-rv .rv-item { padding:22px; border-right:1.5px solid var(--line); display:grid; grid-template-columns:50px 1fr; gap:2px 12px; }
+.bp-rv .rv-item:last-child { border-right:0; }
+.bp-rv .rv-photo { grid-row:span 2; width:50px; height:50px; object-fit:cover; border:2px solid #fff; }
+.bp-rv .rv-name { margin:0; font-family:'Russo One', sans-serif; grid-column:2; grid-row:1; align-self:end; }
+.bp-rv .rv-meta { margin:0; font-size:.85rem; opacity:.75; grid-column:2; grid-row:2; }
+.bp-rv .rv-stars { grid-column:1/-1; display:flex; gap:2px; color:var(--hi); margin-top:12px; }
+.bp-rv .rv-text { grid-column:1/-1; margin:8px 0 0; }
+@media (max-width:860px) { .bp-rv { grid-template-columns:1fr; } .bp-rv .rv-item { border-right:0; border-bottom:1.5px solid var(--line); } }

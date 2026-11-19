@@ -39,3 +39,16 @@ body { margin:0; background:#0a3cff; }
 @media (max-width:760px) { .pl-facts { grid-template-columns:1fr; } .pl-call { margin:0 16px; padding:20px; } }
 .pl-foot { padding:0 5vw 40px; font-size:.85rem; color:#cdd6ff; }
 .pl :focus-visible { outline:3px solid var(--red); outline-offset:2px; }
+
+.pl-facts > div { font-size:1.1rem; } .pl-facts b { display:block; font-family:'Days One', sans-serif; font-weight:400; font-size:1.3rem; margin-bottom:4px; }
+.pl-ico { width:38px; height:38px; margin-bottom:10px; color:#fff; }
+.pl-crew { display:grid; grid-template-columns:1fr 1.1fr; gap:40px; padding:10px 5vw 60px; align-items:start; }
+.pl-crew-photo { aspect-ratio:4/5; overflow:hidden; border:6px solid #fff; }
+.pl-crew-photo img, .pl-crew-photo > span[role=img] { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.1) contrast(1.05); }
+.pl-crew h2 { font-size:clamp(1.8rem,4vw,3rem); margin-bottom:16px !important; } .pl-crew p { font-size:1.12rem; margin:0 0 26px; }
+.pl-rv { display:grid; gap:14px; }
+.pl-rv .rv-item { background:#fff; color:var(--ink); padding:20px; display:grid; grid-template-columns:50px 1fr; gap:2px 12px; }
+.pl-rv .rv-photo { grid-row:span 2; width:50px; height:50px; object-fit:cover; border-radius:50%; }
+.pl-rv .rv-name { margin:0; font-weight:700; grid-column:2; grid-row:1; align-self:end; } .pl-rv .rv-meta { margin:0; font-size:.85rem; color:#4a5480; grid-column:2; grid-row:2; }
+.pl-rv .rv-stars { grid-column:1/-1; display:flex; gap:2px; color:var(--red); margin-top:10px; } .pl-rv .rv-text { grid-column:1/-1; margin:6px 0 0; }
+@media (max-width:860px) { .pl-crew { grid-template-columns:1fr; } }
