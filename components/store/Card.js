@@ -11,7 +11,7 @@ export default function Card({ t, why }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-900/50 transition-colors duration-500 hover:border-white/25 hover:bg-neutral-900">
       <a href={t.liveDemoUrl} {...(internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
-        className="relative m-2.5 mb-0 block aspect-[4/3] overflow-hidden rounded-[1.6rem] bg-neutral-800" aria-label={`Открыть сайт «${t.title}»`}>
+        data-cursor="Открыть" className="relative m-2.5 mb-0 block aspect-[4/3] overflow-hidden rounded-[1.6rem] bg-neutral-800" aria-label={`Открыть сайт «${t.title}»`}>
         <img src={img} alt="" loading="lazy" decoding="async" onError={() => setTall(false)}
           className={`absolute inset-0 h-full w-full object-cover ${tall ? 'object-top transition-[object-position] duration-[5s] ease-in-out group-hover:object-bottom' : 'transition-transform duration-700 group-hover:scale-105'}`} />
         <span className="absolute inset-x-3 bottom-3 flex translate-y-2 items-center justify-center gap-2 rounded-full bg-white py-2.5 text-xs font-bold text-black opacity-0 shadow-xl transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">

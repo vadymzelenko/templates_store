@@ -53,6 +53,11 @@ export default function Stay() {
   const tent = tents.find((t) => t.key === tentKey);
 
   useEffect(() => { setFrom(''); setTo(''); if (guests > tent.guests) setGuests(tent.guests); }, [tentKey]); // eslint-disable-line
+  useEffect(() => {
+    const h = (e) => { if (e.detail.key === 'tent') setTent(e.detail.value); };
+    window.addEventListener('prefill', h);
+    return () => window.removeEventListener('prefill', h);
+  }, []);
 
   function pick(v) {
     if (!from || to || v <= from) { setFrom(v); setTo(''); return; }

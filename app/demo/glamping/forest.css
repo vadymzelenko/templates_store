@@ -67,3 +67,46 @@ body { margin:0; background:#0b1530; }
 .gl-rv .rv-stars { display:flex; gap:2px; color:var(--warm); margin:12px 0 6px; }
 .gl-rv .rv-text { margin:0 0 12px; font-size:1.02rem; } .gl-rv .rv-name { margin:0; font-family:'Prata', serif; font-size:1.15rem; } .gl-rv .rv-meta { margin:0; color:var(--mute); font-size:.85rem; }
 @media (max-width:860px) { .gl-rv { grid-template-columns:1fr; } }
+.gl-kicker { letter-spacing:.3em; text-transform:uppercase; font-size:.78rem; color:var(--warm); margin:0 0 12px; }
+.gl-btn.sm { padding:11px 20px; font-size:.9rem; border:0; cursor:pointer; font-family:inherit; }
+.gl-intro { max-width:1180px; margin:0 auto; padding:80px 28px 20px; display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center; }
+.gl-intro p:not(.gl-kicker) { color:#cfd4e4; font-size:1.1rem; margin:18px 0 0; }
+.gl-nums { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin:0; background:#24345c; border-radius:22px; overflow:hidden; }
+.gl-nums > div { background:var(--night); padding:26px; }
+.gl-nums dt { font-family:'Prata', serif; font-size:2.6rem; color:var(--warm); line-height:1; } .gl-nums dd { margin:6px 0 0; color:var(--mute); }
+@media (max-width:860px) { .gl-intro { grid-template-columns:1fr; gap:30px; padding:60px 16px 10px; } }
+.gl-tentcards { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:30px; }
+.gl-tc { background:var(--deep); border:1px solid #2a3a62; border-radius:24px; overflow:hidden; display:flex; flex-direction:column; transition:transform .35s, border-color .35s; }
+.gl-tc:hover { transform:translateY(-6px); border-color:var(--warm); }
+.gl-tc-pic { position:relative; aspect-ratio:4/3; overflow:hidden; }
+.gl-tc-pic img, .gl-tc-pic > span[role=img] { width:100%; height:100%; object-fit:cover; display:block; transition:transform .8s; }
+.gl-tc:hover .gl-tc-pic img { transform:scale(1.06); }
+.gl-tc-pic > span:not([role]) { position:absolute; left:14px; top:14px; background:rgba(11,21,48,.75); backdrop-filter:blur(6px); padding:5px 12px; border-radius:999px; font-size:.82rem; }
+.gl-tc-b { padding:22px; display:flex; flex-direction:column; flex:1; }
+.gl-tc h3 { font-family:'Prata', serif; font-weight:400; font-size:1.7rem; margin:0 0 12px; }
+.gl-tc ul { list-style:none; margin:0 0 20px; padding:0; display:grid; gap:6px; color:#cfd4e4; font-size:.95rem; }
+.gl-tc li { display:flex; gap:8px; align-items:center; } .gl-tc li svg { color:var(--warm); flex:none; }
+.gl-tc-f { margin-top:auto; display:flex; justify-content:space-between; align-items:flex-end; gap:10px; }
+.gl-tc-f p { margin:0; line-height:1.3; } .gl-tc-f b { font-family:'Prata', serif; font-size:1.5rem; color:var(--warm); font-weight:400; } .gl-tc-f small { color:var(--mute); }
+@media (max-width:1000px) { .gl-tentcards { grid-template-columns:1fr; max-width:560px; } }
+.gl-amen { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:30px; }
+.gl-am { background:var(--deep); border:1px solid #2a3a62; border-radius:20px; padding:22px; display:flex; flex-direction:column; gap:4px; }
+.gl-am svg { width:32px; height:32px; color:var(--warm); margin-bottom:10px; } .gl-am b { font-weight:600; } .gl-am span { color:var(--mute); font-size:.9rem; }
+@media (max-width:860px) { .gl-amen { grid-template-columns:1fr 1fr; } }
+.gl-seasons { padding:70px 0 20px; } .gl-sec-in { max-width:1180px; margin:0 auto; padding:0 28px; }
+.gl-season-row { display:flex; gap:18px; overflow-x:auto; padding:24px 28px 16px max(28px, calc((100% - 1124px) / 2)); scroll-snap-type:x mandatory; scrollbar-width:thin; }
+.gl-season { flex:0 0 min(360px,80vw); scroll-snap-align:start; position:relative; aspect-ratio:3/4; border-radius:24px; overflow:hidden; }
+.gl-season img, .gl-season > span[role=img] { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.gl-season > div { position:absolute; inset:auto 0 0; padding:24px; background:linear-gradient(transparent, rgba(8,14,32,.92) 45%); }
+.gl-season h3 { font-family:'Prata', serif; font-weight:400; font-size:2rem; margin:0 0 6px; } .gl-season p { margin:0; color:#d7d9e6; font-size:.95rem; line-height:1.5; }
+.gl-road { display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
+.gl-road ul { list-style:none; margin:24px 0 0; padding:0; display:grid; gap:20px; }
+.gl-road li { display:flex; gap:14px; } .gl-road li svg { color:var(--warm); flex:none; margin-top:4px; } .gl-road li b { display:block; font-weight:600; } .gl-road li div { color:#cfd4e4; }
+.gl-roadmap { border-radius:24px; overflow:hidden; border:1px solid #2a3a62; } .gl-roadmap svg { display:block; width:100%; height:auto; }
+.gl-route { animation:gl-dash 2s linear infinite; } @keyframes gl-dash { to { stroke-dashoffset:-32; } }
+@media (max-width:860px) { .gl-road { grid-template-columns:1fr; } }
+.gl-faq > div { margin-top:24px; border-top:1px solid #24345c; max-width:860px; }
+.gl-faq details { border-bottom:1px solid #24345c; }
+.gl-faq summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:20px; padding:20px 0; font-size:1.15rem; font-weight:600; }
+.gl-faq summary::-webkit-details-marker { display:none; } .gl-faq summary svg { color:var(--warm); transition:transform .3s; flex:none; }
+.gl-faq details[open] summary svg { transform:rotate(45deg); } .gl-faq p { margin:0 0 20px; color:#cfd4e4; }

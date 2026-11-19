@@ -1,72 +1,98 @@
-import './chalk.css';
+import './coffee.css';
+import { Coffee, Croissant, Leaf, MapPin, Clock, Phone, AtSign } from 'lucide-react';
 import DemoBar from '@/components/demo/DemoBar';
-import Board from './Board';
-import OpenNow from './OpenNow';
 import Reveal from '@/components/demo/Reveal';
 import Reviews from '@/components/demo/Reviews';
 import Photo from '@/components/ui/Photo';
 import { P } from '@/lib/photos';
+import Header from './Header';
+import Parallax from './Parallax';
+import Shop from './Shop';
+import { reviews } from './data';
 
-export const metadata = { title: 'Угол — кофейня', description: 'Сайт кофейни: меловая доска-меню и предзаказ к нужному времени' };
+export const metadata = { title: 'Угол — кофейня на Подоле', description: 'Кофейня «Угол»: своя обжарка, выпечка с 6 утра и предзаказ без очереди' };
 
-export default function Coffee() {
+export default function CoffeePage() {
   return (
-    <div className="cb">
-      <link rel="stylesheet" precedence="default" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Neucha&family=Cousine:wght@400;700&display=swap" />
+    <div className="ug" id="top">
+      <link rel="stylesheet" precedence="default" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:wght@400;600;700&display=swap" />
       <DemoBar slug="coffee" />
+      <Header />
 
-      <section className="cb-board">
-        <div className="cb-frame">
-          <OpenNow />
-          <header className="cb-head">
-            <svg className="cb-cup" viewBox="0 0 120 100" aria-hidden="true">
-              <path d="M22 40h64v20a32 32 0 0 1-64 0z M86 46h8a12 12 0 0 1 0 24h-9 M40 30c-6-8 6-12 0-22 M56 30c-6-8 6-12 0-22 M72 30c-6-8 6-12 0-22 M14 96h84" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <h1>Угол</h1>
-            <p>кофе · выпечка · ул. Ярославова, 1</p>
-          </header>
-          <Board />
-          <p className="cb-scribble" aria-hidden="true">растительное молоко — бесплатно!</p>
+      <section className="ug-hero">
+        <Parallax />
+        <div className="ug-hero-shade" />
+        <div className="ug-hero-t">
+          <p className="ug-kicker ug-anim" style={{ '--d': '.1s' }}>Кофейня · Подол · с 2019</p>
+          <h1 className="ug-anim" style={{ '--d': '.25s' }}>Кофе на углу<br /><em>Ярославовой и Стрелецкой</em></h1>
+          <p className="ug-anim" style={{ '--d': '.4s' }}>Обжариваем зерно сами раз в неделю, печём круассаны с шести утра. Закажите заранее — заберёте без очереди.</p>
+          <div className="ug-hero-cta ug-anim" style={{ '--d': '.55s' }}><a href="#menu" className="ug-btn">Посмотреть меню</a><a href="#visit" className="ug-btn ghost">Как нас найти</a></div>
         </div>
       </section>
 
-      <section className="cb-wall" aria-label="Фото кофейни">
-        <h2>Как у нас</h2>
-        <div className="cb-wall-row" data-lenis-prevent>
-          {[['cafe', 'Утро, 8:15'], ['coffeeArt', 'Латте-арт от Даши'], ['croissant', 'Круассаны из печи'], ['barista', 'Стойка у окна'], ['espresso', 'Эспрессо на зерне недели'], ['cafeDetail', 'Тот самый угол']].map(([k, cap], i) => (
-            <Reveal key={k} delay={i * 0.05} className="cb-pol" style={{ '--r': `${[-3, 2, -1, 3, -2, 1][i]}deg` }}>
-              <Photo id={P[k]} w={600} alt={cap} fallback="#e9dcc3" />
-              <span>{cap}</span>
-            </Reveal>
+      <section className="ug-perks">
+        {[[Coffee, 'Своя обжарка', 'Каждую среду — новое зерно из Эфиопии, Колумбии или Кении.'], [Croissant, 'Выпечка с 6 утра', 'Круассаны и синнабоны делаем на месте, а не размораживаем.'], [Leaf, 'Растительное молоко', 'Овсяное, кокосовое и миндальное — без доплаты.']].map(([Icon, t, x], i) => (
+          <Reveal key={t} delay={i * 0.1} className="ug-perk"><span className="ug-perk-ico"><Icon strokeWidth={1.5} /></span><b>{t}</b><p>{x}</p></Reveal>
+        ))}
+      </section>
+
+      <section className="ug-about" id="about">
+        <Reveal className="ug-about-pics">
+          <Photo id={P.barista} w={900} alt="Стойка бариста" className="ug-ap-a" fallback="#eadfce" />
+          <Photo id={P.coffeeArt} w={600} alt="Латте-арт" className="ug-ap-b" fallback="#e0d2bd" />
+        </Reveal>
+        <Reveal className="ug-about-t" delay={0.1}>
+          <p className="ug-kicker">О нас</p>
+          <h2>Маленькая кофейня с большим окном</h2>
+          <p>Мы открылись в 2019-м в бывшей мастерской часовщика. Сохранили старый паркет, поставили десять столиков и одну очень хорошую кофемашину.</p>
+          <p>Утром здесь берут кофе с собой, днём работают с ноутбуком, по выходным завтракают семьями. Мы знаем большинство гостей по имени — и как они пьют кофе.</p>
+          <dl className="ug-stats"><div><dt>6</dt><dd>сортов зерна в месяц</dd></div><div><dt>400+</dt><dd>чашек в день</dd></div><div><dt>4,9</dt><dd>на Google Maps</dd></div></dl>
+        </Reveal>
+      </section>
+
+      <section className="ug-sec" id="menu">
+        <Reveal className="ug-sec-h"><p className="ug-kicker">Меню</p><h2>Что у нас пьют и едят</h2><p>Нажмите «+» — соберём предзаказ, заберёте без очереди.</p></Reveal>
+        <Shop />
+      </section>
+
+      <section className="ug-gallery" id="gallery">
+        <Reveal className="ug-sec-h"><p className="ug-kicker">Атмосфера</p><h2>Заходите посидеть</h2></Reveal>
+        <div className="ug-grid">
+          {[['cafe', 'a'], ['latte', 'b'], ['croissant', 'c'], ['cups', 'd'], ['cafeDetail', 'e'], ['brew', 'f']].map(([k, c], i) => (
+            <Reveal key={k} delay={i * 0.05} className={`ug-g ug-g-${c}`}><Photo id={P[k]} w={900} alt="" fallback="#eadfce" /></Reveal>
           ))}
         </div>
       </section>
 
-      <section className="cb-napkins">
-        <h2>Оставили на салфетках</h2>
-        <Reviews className="cb-rv" fallback="#e9dcc3" items={[
-          { name: 'Аня', meta: 'каждое утро перед работой', photo: P.face2, text: 'Заказываю с остановки — подхожу, а флэт уайт уже стоит с моим именем. Магия.' },
-          { name: 'Тарас', meta: 'работает тут с ноутбуком', photo: P.face1, text: 'Лучший фильтр на Подоле и розетка у каждого столика. Синнабон — отдельная любовь.' },
-          { name: 'Ира и Макс', meta: 'по выходным', photo: P.face4, text: 'Пришли за кофе, остались на завтрак. Банановый хлеб берём домой каждую субботу.' },
-        ]} />
+      <section className="ug-sec">
+        <Reveal className="ug-sec-h"><p className="ug-kicker">Отзывы</p><h2>Гости о нас</h2></Reveal>
+        <Reviews className="ug-rv" fallback="#eadfce" items={reviews.map((r) => ({ ...r, photo: P[r.photo] }))} />
       </section>
 
-      <footer className="cb-foot">
-        <svg viewBox="0 0 300 160" className="cb-map" aria-hidden="true">
-          <path d="M0 96 L300 76" stroke="#3a2a1f" strokeWidth="2" fill="none" />
-          <path d="M0 120 L300 100" stroke="#3a2a1f" strokeWidth="2" fill="none" />
-          <path d="M150 0 L176 160" stroke="#3a2a1f" strokeWidth="2" fill="none" />
-          <path d="M176 0 L202 160" stroke="#3a2a1f" strokeWidth="2" fill="none" />
-          <text x="10" y="70" fontFamily="Neucha" fontSize="14" fill="#3a2a1f">Ярославова</text>
-          <text x="214" y="40" fontFamily="Neucha" fontSize="14" fill="#3a2a1f" transform="rotate(81 214 40)">Стрелецкая</text>
-          <circle cx="206" cy="122" r="9" fill="#c8462b" /><text x="220" y="146" fontFamily="Neucha" fontSize="15" fill="#c8462b">мы тут!</text>
-        </svg>
-        <div>
-          <p className="cb-foot-h">Где нас найти</p>
-          <p>Угловая дверь с зелёной ручкой.<br />Пн–пт 7:30–20:00, сб–вс 9:00–21:00.</p>
-          <p className="cb-foot-small">© Угол, {new Date().getFullYear()} · @ugol.coffee</p>
-        </div>
-      </footer>
+      <section className="ug-visit" id="visit">
+        <Reveal className="ug-visit-t">
+          <p className="ug-kicker">Как найти</p>
+          <h2>Угловая дверь с зелёной ручкой</h2>
+          <ul>
+            <li><MapPin /> ул. Ярославова, 1, Киев</li>
+            <li><Clock /> Пн–пт 7:30–20:00 · Сб–вс 9:00–21:00</li>
+            <li><Phone /> +380 00 000 00 00</li>
+            <li><AtSign /> @ugol.coffee</li>
+          </ul>
+        </Reveal>
+        <Reveal className="ug-map" delay={0.1}>
+          <svg viewBox="0 0 600 420" aria-hidden="true">
+            <rect width="600" height="420" fill="#efe5d6" />
+            <g stroke="#fff" strokeWidth="38" fill="none"><path d="M-20 250 L620 200" /><path d="M300 -20 L360 440" /><path d="M-20 70 L620 40" strokeWidth="18" /><path d="M110 -20 L150 440" strokeWidth="18" /></g>
+            <g fill="#dccfb9"><rect x="170" y="80" width="110" height="100" rx="6" /><rect x="390" y="70" width="170" height="110" rx="6" /><rect x="170" y="270" width="110" height="130" rx="6" /><rect x="400" y="250" width="160" height="150" rx="6" /></g>
+            <text x="20" y="285" fontSize="15" fill="#8a735f" fontFamily="Source Sans 3">ул. Ярославова</text>
+            <text x="372" y="40" fontSize="15" fill="#8a735f" fontFamily="Source Sans 3" transform="rotate(84 372 40)">ул. Стрелецкая</text>
+            <circle cx="335" cy="226" r="34" fill="#b8562e" opacity=".18" className="ug-pulse" /><circle cx="335" cy="226" r="12" fill="#b8562e" /><circle cx="335" cy="226" r="4.5" fill="#fff" />
+          </svg>
+        </Reveal>
+      </section>
+
+      <footer className="ug-foot"><span className="ug-logo">Угол</span><span>Кофе и выпечка на Подоле</span><span>© Угол, {new Date().getFullYear()}</span></footer>
     </div>
   );
 }

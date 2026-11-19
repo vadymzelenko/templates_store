@@ -36,3 +36,16 @@ body {
 .store-stp .stp-title { font-size:clamp(1.4rem,3vw,2rem); font-weight:800; letter-spacing:-.02em; }
 .store-stp .stp-hint { color:#a3a3a3; opacity:1; }
 .store-stp .stp-next { padding:14px 26px; font-size:.85rem; }
+
+/* Фирменный курсор витрины (components/ui/Cursor.js) */
+.ts-cursor, .ts-cursor * { cursor:none !important; }
+.ts-cursor input, .ts-cursor textarea { cursor:text !important; }
+.ts-dot, .ts-ring { position:fixed; left:0; top:0; z-index:9999; pointer-events:none; }
+.ts-dot { width:6px; height:6px; margin:-3px 0 0 -3px; border-radius:50%; background:#fff; mix-blend-mode:difference; }
+.ts-ring { width:36px; height:36px; margin:-18px 0 0 -18px; border-radius:50%; border:1.5px solid rgba(255,255,255,.55); display:flex; align-items:center; justify-content:center;
+  transition:width .25s ease, height .25s ease, margin .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference; }
+.ts-ring span { font:700 11px/1 var(--font-geist-sans), sans-serif; color:#000; letter-spacing:.04em; text-transform:uppercase; opacity:0; transition:opacity .2s; white-space:nowrap; }
+.ts-ring.hover { width:54px; height:54px; margin:-27px 0 0 -27px; border-color:#fff; }
+.ts-ring.label { width:92px; height:92px; margin:-46px 0 0 -46px; background:#fff; border-color:#fff; mix-blend-mode:normal; }
+.ts-ring.label span { opacity:1; }
+.ts-ring.down { width:28px; height:28px; margin:-14px 0 0 -14px; }
