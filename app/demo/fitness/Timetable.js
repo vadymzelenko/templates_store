@@ -1,6 +1,7 @@
 'use client';
 // Расписание недели = главный экран. Клик по занятию бронирует место; справа собирается «моя неделя».
 import { useMemo, useState } from 'react';
+import { Check, X } from 'lucide-react';
 import { types, days, times, schedule } from './data';
 
 function taken(i) { return (i * 7 + 3) % 9; } // сколько мест уже занято (стабильно для демо)
@@ -56,7 +57,7 @@ export default function Timetable() {
                           aria-label={`${days[c.day]} ${c.time}, ${ty.name}, тренер ${c.coach}, мест: ${c.left}`}>
                           <b>{ty.name}</b>
                           <span>{c.coach}</span>
-                          <em>{on ? '✓ вы записаны' : c.left ? `${c.left} из ${c.spots}` : 'мест нет'}</em>
+                          <em>{on ? <><Check size={13} strokeWidth={3} /> вы записаны</> : c.left ? `${c.left} из ${c.spots}` : 'мест нет'}</em>
                         </button>
                       );
                     })}
@@ -73,14 +74,14 @@ export default function Timetable() {
         {done ? (
           <div className="tt-done">
             <p>Записали на {per} {per === 1 ? 'занятие' : per < 5 ? 'занятия' : 'занятий'}. Напомним за 2 часа до начала.</p>
-            <p className="tt-small">Демо-режим: никуда не отправлено.</p>
+            <p className="tt-small">Пришлём напоминание за 2 часа.</p>
             <button type="button" className="tt-link" onClick={() => { setDone(false); setMine([]); }}>начать заново</button>
           </div>
         ) : (
           <>
             <ul>
               {chosen.map((c) => (
-                <li key={c.i}><span>{days[c.day]} {c.time}</span><b>{types[c.type].name}</b><button type="button" onClick={() => toggle(c.i)} aria-label="Убрать">×</button></li>
+                <li key={c.i}><span>{days[c.day]} {c.time}</span><b>{types[c.type].name}</b><button type="button" onClick={() => toggle(c.i)} aria-label="Убрать"><X size={16} /></button></li>
               ))}
             </ul>
             <p className="tt-tip">{tip}</p>

@@ -3,8 +3,12 @@ import DemoBar from '@/components/demo/DemoBar';
 import Plan from './Plan';
 import Measure from './Measure';
 import { stages } from './data';
+import Reveal from '@/components/demo/Reveal';
+import Reviews from '@/components/demo/Reviews';
+import Photo from '@/components/ui/Photo';
+import { P } from '@/lib/photos';
 
-export const metadata = { title: 'Метр — ремонт квартир · демо', description: 'Демо-лендинг ремонта в виде чертежа: кликабельная планировка, смета и сроки' };
+export const metadata = { title: 'Метр — ремонт квартир', description: 'Сайт ремонта в виде чертежа: кликабельная планировка, смета и сроки' };
 
 const WEEKS = 8;
 
@@ -44,14 +48,31 @@ export default function Renovation() {
         <p className="bp-note">Платите по этапам, после приёмки каждого. Фотоотчёт в Telegram — каждую пятницу.</p>
       </section>
 
+      <section className="bp-sec">
+        <h2><span className="bp-mono">Лист 3</span>Сданные объекты</h2>
+        <div className="bp-objs">
+          {[['interior', 'Двушка на Лукьяновке', '54 м²', '8 нед.'], ['penthouse', 'Трёшка в сталинке', '78 м²', '11 нед.'], ['villa', 'Дом в Буче', '140 м²', '16 нед.'], ['estate', 'Студия на Оболони', '31 м²', '5 нед.']].map(([k, n, a, w], i) => (
+            <Reveal key={k} delay={i * 0.07} className="bp-obj">
+              <Photo id={P[k]} w={900} alt={n} fallback="#2a5a96" />
+              <div className="bp-obj-t"><b>{n}</b><span>{a} · {w}</span></div>
+            </Reveal>
+          ))}
+        </div>
+        <Reviews className="bp-rv" fallback="#2a5a96" items={[
+          { name: 'Алина и Рома', meta: 'двушка, 54 м²', photo: P.face4, text: 'Смета в договоре совпала с финальной суммой до гривны. Каждую пятницу — фото в Telegram, мы ни разу не ездили на объект без повода.' },
+          { name: 'Виктор', meta: 'сталинка, 78 м²', photo: P.face5, text: 'Старые стены, кривые полы, проводка 60-х. Ребята честно сказали про сроки — и уложились.' },
+          { name: 'Оксана', meta: 'студия, 31 м²', photo: P.face6, text: 'Посчитала ремонт на сайте, на замере цена отличалась на 4%. Так и было в итоге.' },
+        ]} />
+      </section>
+
       <section className="bp-sec" id="measure">
-        <h2><span className="bp-mono">Лист 3</span>Вызвать замерщика</h2>
+        <h2><span className="bp-mono">Лист 4</span>Вызвать замерщика</h2>
         <Measure />
       </section>
 
       <footer className="bp-foot bp-mono">
         <span>МЕТР · +380 00 000 00 00 · пн–сб 9–19</span>
-        <span>Демо-проект Template Store. Компания и цены вымышлены.</span>
+        <span>© МЕТР, 2015–{new Date().getFullYear()}</span>
       </footer>
     </div>
   );

@@ -83,7 +83,7 @@ export default function Calc() {
         {done ? (
           <div className="cl-done" role="status">
             <p><b>Приедем {dayLabel(s.date)}, {s.time}.</b> Привезём всё своё: химию, пылесос, тряпки.</p>
-            <p className="cl-small">Демо-режим: заказ никуда не отправлен.</p>
+            <p className="cl-small">Подтверждение пришлём в Telegram, за час до приезда — напоминание.</p>
             <button type="button" className="cl-link" onClick={() => { setDone(false); s.setTime(''); }}>изменить</button>
           </div>
         ) : (

@@ -52,3 +52,9 @@
 .ps .bk { --bk-accent:#236a8c; --bk-ink:#fff; --bk-bg:#fff; --bk-text:#13202b; --bk-muted:#62717d; --bk-line:#dbe3e8; --bk-off:#eef3f6; --bk-radius:10px; }
 .ps .bk-btn { border-radius:999px; }
 .ps .bk-fields label { font-size:.9rem; }
+
+/* Появление блоков при прокрутке (components/demo/Reveal.js) */
+.rvl { opacity:0; translate:0 28px; transition:opacity .7s cubic-bezier(.2,.7,.2,1), translate .7s cubic-bezier(.2,.7,.2,1); }
+.rvl.in { opacity:1; translate:0 0; }
+@media (prefers-reduced-motion:reduce) { .rvl { opacity:1; translate:none; transition:none; } }
+html { scroll-behavior:auto; }

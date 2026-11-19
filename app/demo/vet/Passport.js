@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import useSlots, { dayLabel, WD } from '@/components/demo/useSlots';
 import { kinds, doctors } from './data';
+import Photo from '@/components/ui/Photo';
+import { P } from '@/lib/photos';
 
 export default function Passport() {
   const [pet, setPet] = useState('');
@@ -50,9 +52,8 @@ export default function Passport() {
               </button>
             ))}
           </div>
-          <div className="vp-photo" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d={k.icon} /></svg>
-            <span>фото</span>
+          <div className="vp-photo">
+            {kind === 'cat' || kind === 'dog' ? <Photo key={kind} id={kind === 'cat' ? P.cat : P.dog} w={300} alt={kind === 'cat' ? 'Кот' : 'Собака'} fallback="#f3ecdb" /> : <svg viewBox="0 0 24 24" aria-hidden="true"><path d={k.icon} /></svg>}
           </div>
           {pet.trim() && <span className="vp-stamp">ЗАРЕГИСТРИРОВАН</span>}
         </div>
@@ -83,7 +84,7 @@ export default function Passport() {
           <div className="vp-done" role="status">
             <span className="vp-stamp big">ЗАПИСАН</span>
             <p><b>{name}</b> ждём {dayLabel(s.date)} в {s.time}: {svc.toLowerCase()}, врач {doc.name}.</p>
-            <p className="vp-small">Демо-режим: никуда ничего не отправлено. В рабочей версии хозяин получает письмо, а за неделю до следующей прививки — напоминание.</p>
+            <p className="vp-small">Подтверждение придёт на почту, а за неделю до следующей прививки — напоминание.</p>
             <button type="button" className="vp-link" onClick={() => { setDone(false); s.setTime(''); }}>изменить отметку</button>
           </div>
         ) : (

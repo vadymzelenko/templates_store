@@ -96,7 +96,7 @@ export default function Stay() {
       </div>
       <div className="gl-sum" aria-live="polite">
         {done ? (
-          <p className="gl-done">Шатёр «{tent.name}» ждёт вас. Демо-режим: бронь никуда не отправлена — в рабочей версии гость получает подтверждение и схему проезда.</p>
+          <p className="gl-done">Шатёр «{tent.name}» ждёт вас. Подтверждение и схему проезда пришлём на телефон.</p>
         ) : (
           <>
             <p className="gl-sum-l">{from ? (to ? `${nights.length} ${nights.length === 1 ? 'ночь' : nights.length < 5 ? 'ночи' : 'ночей'}` : 'выберите дату выезда') : 'выберите дату заезда'}</p>

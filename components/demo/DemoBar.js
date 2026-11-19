@@ -7,7 +7,7 @@ export default function DemoBar({ slug }) {
   return (
     <div className="demo-bar">
       <a className="db-back" href="/#catalog">← Каталог</a>
-      <span className="db-name">Демо · {t.title}</span>
+      <span className="db-name">Пример сайта · {t.title}</span>
       <a className="db-cta" href={`/templates/${slug}`}>Хочу такой сайт · {t.price}</a>
     </div>
   );

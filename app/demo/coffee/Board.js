@@ -80,7 +80,7 @@ export default function Board() {
             <>
               <p className="cb-r-c big">{name.toUpperCase()}, ЖДЁМ К {slot}</p>
               <p className="cb-r-c">назовите номер на кассе</p>
-              <p className="cb-r-c small">демо-режим: заказ никуда не ушёл. В рабочей версии он падает бариста в Telegram</p>
+              <p className="cb-r-c small">заказ уже у бариста</p>
               <button type="button" className="cb-r-btn" onClick={() => { setDone(null); setCart({}); setSlot(''); }}>новый чек</button>
             </>
           ) : (
@@ -95,7 +95,7 @@ export default function Board() {
               <button className="cb-r-btn">ПЕЧАТЬ ЧЕКА{slot && ` · ${slot}`}</button>
             </>
           )}
-          <p className="cb-r-c small">спасибо, что вы с нами ☕</p>
+          <p className="cb-r-c small">спасибо, что вы с нами</p>
         </form>
       </section>
     </>

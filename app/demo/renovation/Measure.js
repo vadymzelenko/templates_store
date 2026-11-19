@@ -43,7 +43,7 @@ export default function Measure() {
         <div className="bp-done" role="status">
           <b>СОГЛАСОВАНО</b>
           <p>Инженер приедет {dayLabel(s.date)} ({parts.find((p) => p[0] === s.time)?.[1]}) с лазерным дальномером. Смета по позициям — через 2 дня.</p>
-          <p className="bp-small">демо-режим: заявка никуда не отправлена</p>
+          <p className="bp-small">перезвоним в течение часа, чтобы подтвердить время</p>
         </div>
       ) : (
         <button className="bp-go">Вызвать замерщика — бесплатно</button>

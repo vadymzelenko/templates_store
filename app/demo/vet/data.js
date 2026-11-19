@@ -7,7 +7,7 @@ export const kinds = [
 ];
 
 export const doctors = [
-  { name: 'Елена Бойко', role: 'терапевт, главврач', stamp: 'ТЕРАПИЯ' },
-  { name: 'Тарас Гнатюк', role: 'хирург', stamp: 'ХИРУРГИЯ' },
-  { name: 'Ирина Шевчук', role: 'экзотолог', stamp: 'ЭКЗОТЫ' },
+  { name: 'Елена Бойко', photo: 'face11', role: 'терапевт, главврач', stamp: 'ТЕРАПИЯ' },
+  { name: 'Тарас Гнатюк', photo: 'face9', role: 'хирург', stamp: 'ХИРУРГИЯ' },
+  { name: 'Ирина Шевчук', photo: 'face10', role: 'экзотолог', stamp: 'ЭКЗОТЫ' },
 ];

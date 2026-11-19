@@ -55,8 +55,7 @@ export default function DemoBooking({
   if (done) {
     return (
       <div className="bk bk-done" role="status">
-        <p className="bk-tag">Демо-режим</p>
-        <h3>{doneTitle}</h3>
+                <h3>{doneTitle}</h3>
         <dl>
           {service && <div><dt>{serviceLabel}</dt><dd>{service}</dd></div>}
           {resources && <div><dt>{resourceLabel}</dt><dd>{resource || anyResource}</dd></div>}
@@ -64,7 +63,7 @@ export default function DemoBooking({
           {extra.filter((x) => form[x.key]).map((x) => <div key={x.key}><dt>{x.label}</dt><dd>{form[x.key]}</dd></div>)}
           <div><dt>Имя</dt><dd>{form.name}</dd></div>
         </dl>
-        <p className="bk-hint">В рабочей версии клиенту приходит письмо со ссылкой-подтверждением, открывается личный кабинет для переноса, а запись появляется в CRM владельца.</p>
+        <p className="bk-hint">Мы отправили письмо со ссылкой-подтверждением. В личном кабинете можно перенести или отменить запись.</p>
         <button type="button" className="bk-btn ghost" onClick={() => { setDone(false); setTime(''); }}>Записаться ещё раз</button>
       </div>
     );
@@ -144,7 +143,7 @@ export default function DemoBooking({
 
       {err && <p className="bk-err" role="alert">{err}</p>}
       <button className="bk-btn">{submitText}{time && ` на ${time}`}</button>
-      <p className="bk-tag">Демо-режим: данные никуда не отправляются</p>
+      
     </form>
   );
 }
