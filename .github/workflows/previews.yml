@@ -1,0 +1,83 @@
+name: Previews
+
+# Takes card covers (public/previews/<slug>.jpg) and scrolling screenshots
+# (public/previews/tall/<slug>.jpg) on a GitHub runner, where Unsplash photos and
+# Google Fonts load, and commits them to the branch.
+#
+# Runs automatically when the catalogue changes and creates only missing images.
+# Manual run: Actions -> Previews -> Run workflow. Leave "slugs" empty for all missing
+# covers, or list slugs separated by spaces; tick "force" to retake existing images.
+
+on:
+  push:
+    branches: [main]
+    paths: ['lib/templates.js', 'scripts/previews.mjs', '.github/workflows/previews.yml']
+  workflow_dispatch:
+    inputs:
+      slugs:
+        description: 'Slugs separated by spaces (empty = all)'
+        required: false
+        default: ''
+      force:
+        description: 'Retake existing images'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: previews-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  previews:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.49.1
+          npx playwright install --with-deps chromium
+
+      - name: Build the store and the sites
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+
+      - name: Start the store
+        run: |
+          npx next start -p 3000 > server.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:3000 > /dev/null && exit 0
+            sleep 2
+          done
+          cat server.log
+          exit 1
+
+      - name: Take screenshots
+        run: |
+          MODE="--missing"
+          if [ "${{ inputs.force }}" = "true" ]; then MODE=""; fi
+          node scripts/previews.mjs http://localhost:3000 $MODE ${{ inputs.slugs }}
+
+      - name: Commit new images
+        run: |
+          git add public/previews
+          if git diff --cached --quiet; then
+            echo "No new images"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update card previews"
+          git push

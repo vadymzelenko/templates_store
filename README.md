@@ -36,7 +36,7 @@ Next.js 16 + Tailwind 4 + Framer Motion. Деплой — Vercel (ветка `ma
    - `fits` — ниши, под которые шаблон легко переделать (поиск покажет его и по ним);
    - `liveDemoUrl` — относительный путь (`/projects/...html` или `/demo/...`);
    - `coverImage` — `/previews/<slug>.jpg` или любая ссылка на картинку.
-3. Обложки: `npm run dev`, затем `npm run previews -- http://localhost:3000` — снимет первый экран (`public/previews/`) и длинный скриншот для прокрутки в карточке (`public/previews/tall/`). Запускайте там, где грузятся фото Unsplash, чтобы они попали в обложки.
+3. Обложки снимает GitHub Actions (workflow **Previews**): он запускается сам после изменения `lib/templates.js`, снимает недостающие обложки и коммитит их в ветку. Вручную: Actions → Previews → Run workflow (можно указать slug'и и пересъёмку). Локально: `npm run dev`, затем `npm run previews -- http://localhost:3000` (`--missing` — только недостающие, можно перечислить slug'и) — снимет первый экран (`public/previews/`) и длинный скриншот для прокрутки в карточке (`public/previews/tall/`). Запускайте там, где грузятся фото Unsplash, чтобы они попали в обложки.
 
 `telegramUrl` можно оставить пустым — кнопка сама откроет чат @vzbbme с готовым текстом.
 
