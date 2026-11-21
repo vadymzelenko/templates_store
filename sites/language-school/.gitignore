@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.env*.local
+.DS_Store
+.taste-skill
+*.log
+content/site.json
+content/leads.json
+content/*.tmp
+.env*.local
