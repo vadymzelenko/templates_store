@@ -45,7 +45,10 @@ for (const slug of targets) {
   const run = (cmd, env = {}) =>
     execSync(cmd, { cwd: work, stdio: 'inherit', env: { ...process.env, ...env } });
 
-  run(existsSync(path.join(work, 'package-lock.json')) ? 'npm ci --no-audit --no-fund' : 'npm install --no-audit --no-fund');
+  // Hosting providers (Vercel) build with NODE_ENV=production, which would make npm skip
+  // devDependencies such as Tailwind and PostCSS that the sites need to build.
+  const install = existsSync(path.join(work, 'package-lock.json')) ? 'npm ci' : 'npm install';
+  run(`${install} --include=dev --no-audit --no-fund`, { NODE_ENV: 'development' });
   run(`npx next build ${process.env.NEXT_BUILD_FLAGS || ''}`.trim(), {
     STATIC_EXPORT: '1',
     BASE_PATH: `/projects/${slug}`,
