@@ -21,6 +21,13 @@ const SITES = {
   stille: {},
 };
 
+// Each site is built as an independent project. The host's build environment is not
+// passed through: Vercel injects variables that patch the config of the Next.js app it
+// is building ("Applying modifyConfig from Vercel"), and they break nested builds.
+const PASSTHROUGH = /^(PATH|HOME|USER|SHELL|TMPDIR|TEMP|TMP|LANG|LC_.*|TZ|CI|TERM|SystemRoot|APPDATA|LOCALAPPDATA|ComSpec|PATHEXT|NEXT_FONT_GOOGLE_MOCKED_RESPONSES|NEXT_BUILD_FLAGS|HTTPS?_PROXY|NO_PROXY|https?_proxy|no_proxy|NODE_EXTRA_CA_CERTS|SSL_CERT_FILE|(npm|NPM)_(config|CONFIG)_.*)$/;
+const cleanEnv = () =>
+  Object.fromEntries(Object.entries(process.env).filter(([key]) => PASSTHROUGH.test(key)));
+
 const selected = process.argv.slice(2);
 const targets = selected.length ? selected : Object.keys(SITES);
 
@@ -43,16 +50,17 @@ for (const slug of targets) {
   for (const rel of site.strip ?? []) rmSync(path.join(work, rel), { recursive: true, force: true });
 
   const run = (cmd, env = {}) =>
-    execSync(cmd, { cwd: work, stdio: 'inherit', env: { ...process.env, ...env } });
+    execSync(cmd, { cwd: work, stdio: 'inherit', env: { ...cleanEnv(), ...env } });
 
-  // Hosting providers (Vercel) build with NODE_ENV=production, which would make npm skip
-  // devDependencies such as Tailwind and PostCSS that the sites need to build.
+  // --include=dev: sites need Tailwind and PostCSS from devDependencies even if a host
+  // sets NODE_ENV=production.
   const install = existsSync(path.join(work, 'package-lock.json')) ? 'npm ci' : 'npm install';
-  run(`${install} --include=dev --no-audit --no-fund`, { NODE_ENV: 'development' });
+  run(`${install} --include=dev --no-audit --no-fund`);
   run(`npx next build ${process.env.NEXT_BUILD_FLAGS || ''}`.trim(), {
     STATIC_EXPORT: '1',
     BASE_PATH: `/projects/${slug}`,
     NEXT_TELEMETRY_DISABLED: '1',
+    NODE_ENV: 'production',
   });
 
   rmSync(out, { recursive: true, force: true });
