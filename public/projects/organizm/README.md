@@ -1,1 +1,0 @@
-# organizm-23-serpnia-dev

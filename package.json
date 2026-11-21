@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build-sites.mjs && next build",
     "start": "next start",
     "lint": "eslint",
-    "previews": "node scripts/previews.mjs"
+    "previews": "node scripts/previews.mjs",
+    "sites:build": "node scripts/build-sites.mjs"
   },
   "dependencies": {
     "framer-motion": "^13.1.1",

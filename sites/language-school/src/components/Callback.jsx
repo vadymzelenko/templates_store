@@ -60,13 +60,18 @@ export default function Callback() {
     if (!form.agree) return setError('Нужно согласие на обработку данных');
     setState('sending');
     try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, source: 'site_callback' }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || 'Не получилось отправить');
+      if (process.env.NEXT_PUBLIC_DEMO === '1') {
+        // Static demo build: there is no server, so the request is only simulated.
+        await new Promise((r) => setTimeout(r, 600));
+      } else {
+        const res = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...form, source: 'site_callback' }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || 'Не получилось отправить');
+      }
       setState('done');
       if (!reduced()) {
         requestAnimationFrame(() =>
@@ -175,7 +180,7 @@ export default function Callback() {
             <input type="checkbox" checked={form.agree} onChange={set('agree')} />
             <span>
               Согласен на обработку персональных данных по{' '}
-              <a className="link link--strong" href="/privacy" target="_blank">
+              <a className="link link--strong" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/privacy/`} target="_blank">
                 политике конфиденциальности
               </a>
             </span>

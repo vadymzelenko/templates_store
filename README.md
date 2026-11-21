@@ -11,6 +11,8 @@ Next.js 16 + Tailwind 4 + Framer Motion. Деплой — Vercel (ветка `ma
 | `lib/industries.js` | 22 отрасли и ~300 ниш, по ним работает поиск |
 | `lib/search.js` | Логика поиска и ссылка на Telegram |
 | `public/projects/**` | HTML-лендинги |
+| `sites/*` | Отдельные Next.js-лендинги со своими зависимостями (собираются в `public/projects/<slug>/`) |
+| `scripts/build-sites.mjs` | Сборка `sites/*` в статику |
 | `app/demo/*` | Демо на Next.js с рабочей онлайн-записью (демо-режим) |
 | `public/previews/*.jpg` | Обложки карточек |
 
@@ -56,3 +58,22 @@ Next.js 16 + Tailwind 4 + Framer Motion. Деплой — Vercel (ветка `ma
 Логика слотов для записи — `components/demo/useSlots.js`, данные каждого демо — `app/demo/<slug>/data.js`.
 Демо-запись ничего не отправляет; в рабочей версии подключается booking engine.
 Рабочий booking engine (Supabase, magic link, кабинет, CRM) лежит в ветке `supabase-crm-landings` и подключается к проекту клиента при заказе.
+
+## Лендинги на Next.js (`sites/`)
+
+Крупные лендинги живут в `sites/<slug>` как самостоятельные Next.js-проекты: свои зависимости, свой `next.config.mjs`, их можно запускать и развивать отдельно (`cd sites/<slug> && npm install && npm run dev`).
+
+| Папка | Проект | Адрес в витрине |
+|---|---|---|
+| `sites/enigma-photo` | Enigma Studio — сайт фотографа (GSAP, Lenis) | `/projects/enigma-photo/` |
+| `sites/language-school` | «Вылет» — языковая школа с админкой (GSAP) | `/projects/language-school/` |
+| `sites/vibe-bistro` | VIBE*BISTRO — лендинг бистро (Tailwind) | `/projects/vibe-bistro/` |
+| `sites/stille` | Stille — лендинг цифрового продукта (Tailwind) | `/projects/stille/` |
+
+`npm run build` сначала выполняет `npm run sites:build`: каждый сайт собирается статическим экспортом (`output: 'export'`, `basePath: /projects/<slug>`) во временной копии и кладётся в `public/projects/<slug>/`. Эти папки не хранятся в git, их создаёт сборка. Собрать один сайт: `npm run sites:build -- stille`.
+
+В статической версии нет серверной части: у языковой школы из копии убираются админка и API, а форма заявки работает в демо-режиме (`NEXT_PUBLIC_DEMO=1`) и ничего не отправляет. Полная версия с админкой запускается из `sites/language-school` через `npm run build && npm start`.
+
+`next.config.mjs` витрины переписывает адреса `/projects/<slug>/...` на соответствующий `index.html`, поэтому ссылки вида `/projects/stille/` работают.
+
+Чтобы добавить новый сайт: положить проект в `sites/<slug>`, добавить в его `next.config.mjs` блок со `STATIC_EXPORT` и `BASE_PATH` (как в соседних сайтах), вписать `<slug>` в `SITES` в `scripts/build-sites.mjs` и в `.gitignore`, добавить карточку в `lib/templates.js`.

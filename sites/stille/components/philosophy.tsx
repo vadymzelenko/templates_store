@@ -5,7 +5,7 @@ export function Philosophy() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left: Image placeholder */}
           <div className="relative aspect-[4/5] bg-muted rounded-lg overflow-hidden">
-            <img src="/minimal-scandinavian-workspace-with-natural-light-.jpg" alt="Serene workspace" className="w-full h-full object-cover" />
+            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/minimal-scandinavian-workspace-with-natural-light-.jpg`} alt="Serene workspace" className="w-full h-full object-cover" />
             {/* Decorative accent */}
             <div className="absolute bottom-6 left-6 right-6 p-6 bg-background/90 backdrop-blur-sm rounded-lg">
               <p className="text-sm text-muted-foreground italic">

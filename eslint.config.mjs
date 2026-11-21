@@ -10,6 +10,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone landings with their own configs; built by scripts/build-sites.mjs
+    "sites/**",
+    "public/projects/**",
   ]),
 ]);
 

@@ -11,7 +11,7 @@ export function Testimonial() {
 
         <div className="flex items-center justify-center gap-4">
           <div className="w-12 h-12 rounded-full bg-muted overflow-hidden">
-            <img src="/professional-woman-portrait--soft-lighting--neutra.jpg" alt="Emma Lindström" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Emma Lindström" className="w-full h-full object-cover" />
           </div>
           <div className="text-left">
             <p className="text-foreground font-medium">Emma Lindström</p>
